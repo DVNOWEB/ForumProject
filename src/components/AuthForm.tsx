@@ -14,15 +14,9 @@ function AuthForm() {
     const storedUsers = localStorage.getItem('users')
     if (storedUsers) {
       const parsedUsers = JSON.parse(storedUsers)
-      // Du kan sätta den första användaren som inloggad här om det behövs.
+      // You can set the first user as the logged-in user here if needed
     }
   }, [])
-
-  const generateUserId = () => {
-    // Generera ett unikt användar-ID här (till exempel med hjälp av UUID eller någon annan metod).
-    // I detta exempel använder vi en enkel tidsstämpel för att skapa ett ID.
-    return Date.now().toString()
-  }
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,10 +26,10 @@ function AuthForm() {
 
     if (!name && !email && !password && loggedInUser) {
       setLoggedInUser(null)
-      setName('')
+      setName('') // Reset the name
       setEmail('')
       setPassword('')
-      setMessage('Loggad ut.')
+      setMessage('Logged out successfully.')
       setMessageColor('green')
       setTimeout(() => {
         setMessage(null)
@@ -51,25 +45,23 @@ function AuthForm() {
       const userExists = users.some((user: any) => user.email === email)
 
       if (userExists) {
-        setMessage('Användaren finns redan. Logga in istället.')
+        setMessage('User already exists. Log in instead.')
         setMessageColor('red')
         return
       }
 
-      const userId = generateUserId() // Skapa ett unikt användar-ID
-      const newUser = { id: userId, name, email, password }
+      const newUser = { name, email, password }
       users.push(newUser)
       localStorage.setItem('users', JSON.stringify(users))
 
-      setLoggedInUser(userId) // Sätt användarens ID som inloggad
+      setLoggedInUser(email)
       setIsRegistered(true)
-      setName('')
       setEmail('')
       setPassword('')
-      setMessage('Registreringen lyckades.')
+      setMessage('Registration successful.')
       setMessageColor('green')
     } else {
-      setMessage('Fyll i alla fält.')
+      setMessage('Please fill in all fields.')
       setMessageColor('red')
     }
 
@@ -83,16 +75,16 @@ function AuthForm() {
     <div className="main_container">
       {loggedInUser ? (
         <div>
-          <h2>Välkommen, användare {loggedInUser}!</h2>
-          <button onClick={handleFormSubmit}>Logga ut</button>
+          <h2>Welcome, {name || 'User'}!</h2>
+          <button onClick={handleFormSubmit}>Log Out</button>
         </div>
       ) : (
         <div>
           <h2 style={{ color: messageColor || '' }}>{message}</h2>
-          <h2>{isRegistered ? 'Logga in' : 'Registrera'}</h2>
+          <h2>{isRegistered ? 'Log in' : 'Register'}</h2>
           <form onSubmit={handleFormSubmit}>
             <div>
-              <label htmlFor="Name">Namn:</label>
+              <label htmlFor="Name">Name:</label>
               <input
                 type="text"
                 id="Name"
@@ -101,7 +93,7 @@ function AuthForm() {
               />
             </div>
             <div>
-              <label htmlFor="Email">E-post:</label>
+              <label htmlFor="Email">Email:</label>
               <input
                 type="email"
                 id="Email"
@@ -110,7 +102,7 @@ function AuthForm() {
               />
             </div>
             <div>
-              <label htmlFor="Password">Lösenord:</label>
+              <label htmlFor="Password">Password:</label>
               <input
                 type="password"
                 id="Password"
@@ -120,15 +112,15 @@ function AuthForm() {
             </div>
             <div>
               <button type="submit">
-                {isRegistered ? 'Logga in' : 'Registrera'}
+                {isRegistered ? 'Log in' : 'Register'}
               </button>
             </div>
           </form>
           <div>
             <button onClick={() => setIsRegistered(!isRegistered)}>
               {isRegistered
-                ? 'Har du inget konto? Registrera här.'
-                : 'Har du redan ett konto? Logga in här.'}
+                ? "Don't have an account? Register here."
+                : 'Already have an account? Log in here.'}
             </button>
           </div>
         </div>
