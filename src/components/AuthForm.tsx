@@ -18,6 +18,12 @@ function AuthForm() {
     }
   }, [])
 
+  const generateUserId = () => {
+    // Generate a unique user ID here (e.g., using a library like uuid)
+    // For simplicity, I'll just use a random number for demonstration purposes
+    return Math.random().toString(36).substring(7)
+  }
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -45,16 +51,30 @@ function AuthForm() {
       const userExists = users.some((user: any) => user.email === email)
 
       if (userExists) {
+        // Find the user by email
+        const existingUser = users.find((user: any) => user.email === email)
+        if (existingUser && existingUser.name === name) {
+          // Redirect to welcome page if the name matches
+          setLoggedInUser(existingUser.id) // Set the user ID as the logged-in user
+          return
+        }
+
         setMessage('User already exists. Log in instead.')
         setMessageColor('red')
         return
       }
 
-      const newUser = { name, email, password }
+      if (isRegistered) {
+        setMessage('User not registered. Please register first.')
+        setMessageColor('red')
+        return
+      }
+
+      const newUser = { id: generateUserId(), name, email, password }
       users.push(newUser)
       localStorage.setItem('users', JSON.stringify(users))
 
-      setLoggedInUser(email)
+      setLoggedInUser(newUser.id) // Set the user ID as the logged-in user
       setIsRegistered(true)
       setEmail('')
       setPassword('')
@@ -71,12 +91,25 @@ function AuthForm() {
     }, 3000)
   }
 
+  const handleLogout = () => {
+    setLoggedInUser(null)
+    setName('')
+    setEmail('')
+    setPassword('')
+    setMessage('Logged out successfully.')
+    setMessageColor('green')
+    setTimeout(() => {
+      setMessage(null)
+      setMessageColor(null)
+    }, 3000)
+  }
+
   return (
     <div className="main_container">
       {loggedInUser ? (
         <div>
           <h2>Welcome, {name || 'User'}!</h2>
-          <button onClick={handleFormSubmit}>Log Out</button>
+          <button onClick={handleLogout}>Log Out</button>
         </div>
       ) : (
         <div>
