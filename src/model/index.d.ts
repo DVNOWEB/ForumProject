@@ -4,7 +4,7 @@ interface User {
   userName: string
 }
 
-type ThreadCategory = 'THREAD' | 'QNA'
+type ThreadCategory = 'THREAD' | 'QNA';
 
 interface Thread {
   id: number
