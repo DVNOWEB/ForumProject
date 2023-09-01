@@ -9,6 +9,11 @@ const ThreadCreationView = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+
+    if(title.length < 1 || description.length < 1){
+      return
+    }
+
     const newThread = {
       title,
       category,
