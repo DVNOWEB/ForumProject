@@ -11,8 +11,10 @@ interface Thread {
   title: string
   category: ThreadCategory
   creationDate: string
-  description: string
+  description?: string
   creator: User
+  comments?: Comment[];
+
 }
 
 interface QNAThread extends Thread {
@@ -23,7 +25,7 @@ interface QNAThread extends Thread {
 
 interface Comment {
   id: number
-  thread: number
+  // thread: number
   content: string
   creator: User
 }
