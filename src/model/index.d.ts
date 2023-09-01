@@ -1,12 +1,12 @@
-export interface User {
+interface User {
   id: number
   name: string
   userName: string
 }
 
-export type ThreadCategory = 'THREAD' | 'QNA'
+type ThreadCategory = 'THREAD' | 'QNA'
 
-export interface Thread {
+interface Thread {
   id: number
   title: string
   category: ThreadCategory
@@ -15,13 +15,13 @@ export interface Thread {
   creator: User
 }
 
-export interface QNAThread extends Thread {
+interface QNAThread extends Thread {
   category: 'QNA'
   isAnswered: boolean
   commentAnswerId?: number
 }
 
-export interface Comment {
+interface Comment {
   id: number
   thread: number
   content: string
