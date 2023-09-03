@@ -106,14 +106,17 @@ function AuthForm() {
 
   return (
     <div className="main_container">
+      <div className="header">
+        <h1>Online Forum</h1>   
+          <span>Login or register</span>
+      </div>
       {loggedInUser ? (
         <div>
           <h2>Welcome, {name || 'User'}!</h2>
           <button onClick={handleLogout}>Log Out</button>
         </div>
       ) : (
-        <div>
-          <h2 style={{ color: messageColor || '' }}>{message}</h2>
+        <div className="form_container">
           <h2>{isRegistered ? 'Log in' : 'Register'}</h2>
           <form onSubmit={handleFormSubmit}>
             <div>
@@ -156,6 +159,7 @@ function AuthForm() {
                 : 'Already have an account? Log in here.'}
             </button>
           </div>
+          <h2 style={{ color: messageColor || '' }}>{message}</h2>
         </div>
       )}
     </div>
