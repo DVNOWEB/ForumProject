@@ -6,11 +6,13 @@ import ThreadDetailView from './components/details/ThreadDetailView';
 
 
 
+
+
 function App() {
   return (
     <div className="App">
       <AuthForm />
-      <ThreadDetailView  thread = {thread}/>
+      <ThreadDetailView key={thread.id} thread={threadData} />
     </div>
   );
 }
