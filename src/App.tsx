@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <AuthForm />
-      <ThreadDetailView/>
+      <ThreadDetailView  thread = {thread}/>
     </div>
   );
 }
