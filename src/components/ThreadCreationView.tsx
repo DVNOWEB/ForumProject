@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/AuthForm.css'
+import '../styles/ThreadCreationView.css'
 
 function ThreadCreationView({
   onCreateThread,
