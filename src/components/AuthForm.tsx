@@ -75,48 +75,8 @@ function AuthForm() {
   }
 
   return (
-    <div className="main_container">
-      {loggedInUser ? (
-        <div>
-          <h2>Welcome, {loggedInUser}!</h2>
-          <button onClick={handleFormSubmit}>Log Out</button>
-        </div>
-      ) : (
-        <div>
-          <h2 style={{ color: messageColor || '' }}>{message}</h2>
-          <h2>{isRegistered ? 'Log in' : 'Register'}</h2>
-          <form onSubmit={handleFormSubmit}>
-            <div>
-              <label>Email:</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div>
-              <button type="submit">
-                {isRegistered ? 'Log in' : 'Register'}
-              </button>
-            </div>
-          </form>
-          <div>
-            <button onClick={() => setIsRegistered(!isRegistered)}>
-              {isRegistered
-                ? "Don't have an account? Register here."
-                : 'Already have an account? Log in here.'}
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="authContainer">
+      
     </div>
   )
 }

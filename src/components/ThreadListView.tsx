@@ -19,10 +19,10 @@ function saveThreadToLocalStorage(threadData: Thread | QNAThread) {
   }
 }
 
-const newThread: Thread = {
+const newThread: Thread | QNAThread = {
   id: 2,
   title: 'En till tråd',
-  category: 'THREAD',
+  category: 'QNA',
   creationDate: 'idag',
   description: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   creator: {
@@ -30,19 +30,21 @@ const newThread: Thread = {
     name: 'Banan Mannen',
     userName: 'Banana',
   },
+  isAnswered: false
+  
 };
 
 saveThreadToLocalStorage(newThread);
 //--------------------------------------------------------------------------------------------------
 function ThreadListView() {
 
-const [threads, setThreads] = useState<(Thread)[]>([])
+const [threads, setThreads] = useState<(Thread)[] | QNAThread[]>([])
 
 useEffect(() => {
   const fetchData = async () => {
-    const threadData = localStorage.getItem('threads')
+    const threadData: string|null = localStorage.getItem('threads')
     if(threadData) {
-      const parsedThreads = JSON.parse(threadData)
+      const parsedThreads: Thread[]|QNAThread[] = JSON.parse(threadData)
       setThreads(parsedThreads)
     }
   }

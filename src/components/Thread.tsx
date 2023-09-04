@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ThreadProps {
-  thread: Thread;
+  thread: Thread | QNAThread
 }
 
 function Thread({ thread }: ThreadProps) {
@@ -12,6 +12,14 @@ function Thread({ thread }: ThreadProps) {
       <p>Creation Date: {thread.creationDate}</p>
       <p>Creator: {thread.creator.name}</p>
       <p>Description: {thread.description}</p>
+      {thread.category === 'QNA' && 'isAnswered' in thread &&(
+        <div>
+          <p>Is Answered: {thread.isAnswered ? 'yes' : 'no'}</p>
+          {thread.commentAnswerId && (
+            <p>Answer ID: {thread.commentAnswerId}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
