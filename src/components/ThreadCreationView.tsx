@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ThreadCreationView.css";
 
-const ThreadCreationView = () => {
+const ThreadCreationView = ({ loggedInUser}: ThreadCreationViewProps) => {
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<ThreadCategory>("QNA");
   const [description, setDescription] = useState<string>("");
@@ -12,7 +12,8 @@ const [threadsArray, setThreadsArray] = useState([])
 
   const [user, setUser] = useState<User>({id: 2,
     name: "Calle",
-    userName: "CalleKula"
+    userName: "CalleKula",
+    password: "1234"
   })
 
 
@@ -51,9 +52,10 @@ const [threadsArray, setThreadsArray] = useState([])
       category,
       creationDate: "idag",
       description,
-      creator: user
+      creator: user,
     };
 
+    console.log(loggedInUser)
     saveThreadToLocalStorage(newThread)
   };
 

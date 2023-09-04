@@ -2,6 +2,7 @@ interface User {
   id: number
   name: string
   userName: string
+  password: string
 }
 
 type ThreadCategory = 'THREAD' | 'QNA';
@@ -13,7 +14,6 @@ interface Thread {
   creationDate: string
   description: string
   creator: User
-  comments: Comment[]
 }
 
 interface QNAThread extends Thread {
@@ -30,17 +30,12 @@ interface Comment {
 }
 
 interface ThreadCreationViewProps {
-  onCreateThread: (
-    title: string,
-    category: ThreadCategory,
-    description: string
-  ) => void
-  loggedInUser: string | null // Pass the logged-in user ID
-  threads: Thread[] // Pass the threads array
+  loggedInUser: User | null;
 }
 
-// Login form component
+
 interface AuthFormProps {
-  onLogin: (user: string | null) => void // Change to number type
+  setLoggedInUser: (user: User | null) => void;
+  loggedInUser: User | null;
 }
 
