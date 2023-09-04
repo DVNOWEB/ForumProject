@@ -6,6 +6,35 @@ const ThreadCreationView = () => {
   const [category, setCategory] = useState<ThreadCategory>("QNA");
   const [description, setDescription] = useState<string>("");
 
+
+  //Om vi vill få tag på den här globalt, flytta ut till Context/redux
+const [threadsArray, setThreadsArray] = useState([])
+
+  const [user, setUser] = useState<User>({id: 2,
+    name: "Calle",
+    userName: "CalleKula"
+  })
+
+
+  const saveThreadToLocalStorage = (threadData: Thread | QNAThread) => {
+    try {
+      //Hämtar hem data från local
+      const existingData = localStorage.getItem("threads")
+      const existingThreads = existingData ? JSON.parse(existingData): [];
+      existingThreads.push(threadData);
+      
+      localStorage.setItem('threads', JSON.stringify(existingThreads))
+      setThreadsArray(existingThreads)
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -14,13 +43,18 @@ const ThreadCreationView = () => {
       return
     }
 
-    const newThread = {
+
+    //Följer Thread
+    const newThread: Thread = {
+      id: threadsArray.length + 1,
       title,
       category,
+      creationDate: "idag",
       description,
+      creator: user
     };
 
-    console.log(newThread);
+    saveThreadToLocalStorage(newThread)
   };
 
   return (
