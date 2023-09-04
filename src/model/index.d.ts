@@ -13,7 +13,7 @@ interface Thread {
   creationDate: string
   description?: string
   creator: User
-  comments?: Comment[];
+  comments: Comment[];
 
 }
 

@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <AuthForm />
-      <ThreadDetailView key={thread.id} thread={threadData} />
+      <ThreadDetailView />
     </div>
   );
 }
