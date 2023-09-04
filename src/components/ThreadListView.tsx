@@ -32,9 +32,7 @@ function saveCommentToLocalStorage(commentData: _Comment) {
     console.log('Error saving thread to localStorage:', error)
   }
 }
-{/* <h3>Answered!</h3>
-            <p>Answer: {answer?.content}</p>
-            <p>By: {answer?.creator.userName}</p> */}
+
 
 /* const newComment: _Comment = {
   id: 9,

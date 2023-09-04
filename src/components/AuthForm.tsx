@@ -107,7 +107,7 @@ function AuthForm({ loggedInUser, setLoggedInUser}: AuthFormProps) {
   }
 
   return (
-    <div className="authContainer">
+    
       
     <div className="main_container">
       <div className="header">
