@@ -3,7 +3,7 @@ import '../styles/ThreadCreationView.css'
 
 const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
   const [title, setTitle] = useState<string>('')
-  const [category, setCategory] = useState<ThreadCategory>('QNA')
+  const [category, setCategory] = useState<ThreadCategory>('THREAD')
   const [description, setDescription] = useState<string>('')
 
   //Om vi vill få tag på den här globalt, flytta ut till Context/redux
@@ -49,6 +49,12 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
 
     console.log(loggedInUser)
     saveThreadToLocalStorage(newThread)
+
+
+    // Clearing the form
+    setTitle('')
+    setCategory('THREAD')
+    setDescription('')
   }
 
   return (
