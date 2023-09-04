@@ -44,6 +44,8 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       };
   
       saveThreadToLocalStorage(newThread)
+      setTitle('')
+      setDescription('')
     }
 
     if (category === "QNA") {
@@ -60,6 +62,9 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       };
   
       saveThreadToLocalStorage(newQNAThread)
+      setTitle('')
+      setDescription('')
+
 
     }
     else {
