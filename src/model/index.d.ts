@@ -21,9 +21,16 @@ interface QNAThread extends Thread {
   commentAnswerId?: number
 }
 
-interface Comment {
+interface _Comment {
   id: number
   thread: number
   content: string
   creator: User
+  isAnswer: boolean
 }
+
+interface ThreadProps {
+  thread: Thread | QNAThread
+  comments: _Comment[]
+}
+
