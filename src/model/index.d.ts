@@ -13,6 +13,7 @@ interface Thread {
   creationDate: string
   description: string
   creator: User
+  comments: Comment[]
 }
 
 interface QNAThread extends Thread {
@@ -28,18 +29,6 @@ interface Comment {
   creator: User
 }
 
-interface Message {
-  title: string;
-  category: ThreadCategory;
-  description: string;
-  user: string; // User ID
-}
-
-interface AuthFormProps {
-  onLogin: (user: string | null) => void // Define the onLogin prop
-}
-
-
 interface ThreadCreationViewProps {
   onCreateThread: (
     title: string,
@@ -47,4 +36,11 @@ interface ThreadCreationViewProps {
     description: string
   ) => void
   loggedInUser: string | null // Pass the logged-in user ID
+  threads: Thread[] // Pass the threads array
 }
+
+// Login form component
+interface AuthFormProps {
+  onLogin: (user: string | null) => void // Change to number type
+}
+

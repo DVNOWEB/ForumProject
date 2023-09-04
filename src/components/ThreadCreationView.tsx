@@ -1,9 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/ThreadCreationView.css'
 
+export const handleCreateThread = (
+  threads: Thread[],
+  loggedInUser: string | null,
+  title: string,
+  category: ThreadCategory,
+  description: string
+): Thread[] => {
+  if (loggedInUser) {
+    const newThread: Thread = {
+      id: threads.length + 1, // Generate a unique ID for the thread
+      title,
+      category,
+      creationDate: new Date().toISOString(),
+      description,
+      creator: {
+        id: loggedInUser ? parseInt(loggedInUser, 10) : 0,
+        name: '', 
+        userName: '', 
+      },
+      comments: [], 
+    }
+
+    // Return the new threads array with the added thread
+    return [...threads, newThread]
+  }
+
+  // Return the original threads array if not logged in
+  return threads
+}
+
 function ThreadCreationView({
   onCreateThread,
   loggedInUser,
+  threads,
 }: ThreadCreationViewProps) {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState<ThreadCategory>('THREAD')
