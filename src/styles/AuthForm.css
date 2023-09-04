@@ -85,4 +85,9 @@ button{
     background-color: transparent;
     box-shadow: 0 2px 3px #ccc;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+button:hover{
+    box-shadow: none;
 }
