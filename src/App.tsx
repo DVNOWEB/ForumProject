@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import "../src/styles/App.css";
 import AuthForm from "./components/AuthForm";
 import ThreadCreationView from "./components/ThreadCreationView";
-import '../src/styles/App.css';
-import '../src/styles/Thread.css';
-import '../src/styles/TreadListView.css';
-
 
 import ThreadListView from './components/ThreadListView';
 

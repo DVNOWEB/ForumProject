@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Thread from './Thread';
+import '../styles/TreadListView.css';
 
 // Function to save a thread to localStorage
 function saveThreadToLocalStorage(threadData: Thread | QNAThread) {

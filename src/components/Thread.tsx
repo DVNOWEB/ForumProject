@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import '../styles/Thread.css'
 
 function Thread({ thread, comments }: ThreadProps) {
   
