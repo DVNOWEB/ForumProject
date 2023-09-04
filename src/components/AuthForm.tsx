@@ -113,7 +113,7 @@ function AuthForm({ loggedInUser, setLoggedInUser}: AuthFormProps) {
         <span>Login or register</span>
       </div>
       {loggedInUser ? (
-        <div>
+        <div className='welcome_div'>
           <h2>Welcome, {name || 'User'}!</h2>
           <button onClick={handleLogout}>Log Out</button>
         </div>
