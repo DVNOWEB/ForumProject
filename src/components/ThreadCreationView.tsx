@@ -10,12 +10,6 @@ const ThreadCreationView = ({ loggedInUser}: ThreadCreationViewProps) => {
   //Om vi vill få tag på den här globalt, flytta ut till Context/redux
 const [threadsArray, setThreadsArray] = useState([])
 
-  const [user, setUser] = useState<User>({id: 2,
-    name: "Calle",
-    userName: "CalleKula",
-    password: "1234"
-  })
-
 
   const saveThreadToLocalStorage = (threadData: Thread | QNAThread) => {
     try {
@@ -34,8 +28,6 @@ const [threadsArray, setThreadsArray] = useState([])
   }
 
 
-
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -44,19 +36,41 @@ const [threadsArray, setThreadsArray] = useState([])
       return
     }
 
+    if (category === "THREAD") {
 
-    //Följer Thread
-    const newThread: Thread = {
-      id: threadsArray.length + 1,
-      title,
-      category,
-      creationDate: "idag",
-      description,
-      creator: user,
-    };
+      //Följer Thread
+      const newThread: Thread = {
+        id: threadsArray.length + 1,
+        title,
+        category,
+        creationDate: "idag",
+        description,
+        creator: loggedInUser,
+      };
+  
+      saveThreadToLocalStorage(newThread)
+    }
 
-    console.log(loggedInUser)
-    saveThreadToLocalStorage(newThread)
+    if (category === "QNA") {
+       //Följer QNAThread
+       const newQNAThread: QNAThread = {
+        id: threadsArray.length + 1,
+        title,
+        category,
+        creationDate: "idag",
+        isAnswered: false,
+        commentAnswerId: 1,
+        description,
+        creator: loggedInUser,
+      };
+  
+      saveThreadToLocalStorage(newQNAThread)
+
+    }
+    else {
+      console.log("Something went wrong")
+    }
+
   };
 
   return (

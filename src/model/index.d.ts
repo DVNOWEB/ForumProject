@@ -17,7 +17,7 @@ interface Thread {
 }
 
 interface QNAThread extends Thread {
-  category: 'QNA'
+  category: ThreadCategory
   isAnswered: boolean
   commentAnswerId?: number
 }
@@ -30,7 +30,7 @@ interface Comment {
 }
 
 interface ThreadCreationViewProps {
-  loggedInUser: User | null;
+  loggedInUser: User;
 }
 
 
