@@ -38,7 +38,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         id: threadsArray.length + 1,
         title,
         category,
-        creationDate: "idag",
+        creationDate: new Date().toString(),
         description,
         creator: loggedInUser,
       };
@@ -54,7 +54,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         id: threadsArray.length + 1,
         title,
         category,
-        creationDate: "idag",
+        creationDate: new Date().toString(),
         isAnswered: false,
         commentAnswerId: 1,
         description,
