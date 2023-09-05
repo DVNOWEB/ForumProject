@@ -35,16 +35,11 @@ interface ThreadCreationViewProps {
 }
 
 
-// interface AuthFormProps {
-//   setLoggedInUser: (user: User | null) => void;
-//   loggedInUser: User | null;
-
-// }
-
 interface AuthFormProps {
-  loggedInUser: User | null
-  setLoggedInUser: (user: User | null) => void
+  setLoggedInUser: (user: User | null) => void;
+  loggedInUser: User | null;
 }
+
 
 interface ThreadProps {
   thread: Thread | QNAThread
