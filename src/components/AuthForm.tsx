@@ -119,7 +119,7 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
   return (
     <div className="main_container">
       <div className="header">
-        <h1>Online Forum</h1>
+        <h1>🌍nline Forum </h1>
         {localStorage.getItem('loggedInUser') ? (
           <span>Logged in: {new Date().toISOString().split('T')[0]}</span>
         ) : (
