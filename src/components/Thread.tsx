@@ -2,20 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Thread.css'
 
-function Thread({ thread, comments }: ThreadProps) {
-  
+
+
+  function Thread({ thread, comments }: ThreadProps) {
   const [answer, setAnswer] = useState<(_Comment)>()
   useEffect(() => {
-    const fetchAnswer = async () => {
-      if(comments) {
-        setAnswer(comments.find((comment) => ((comment.isAnswer === true) && comment.thread === thread.id)))
-        }
+    if('isAnswered' in thread && thread.isAnswered === true){
+      const qnaThread = thread as QNAThread
+      setAnswer(comments.find((comment) => (comment.id === qnaThread.commentAnswerId)))
     }
-    fetchAnswer()
   }, [])
-
   
-
+  
   return (
     <div className='threadContainer'>
       <h2>{thread.title}</h2>

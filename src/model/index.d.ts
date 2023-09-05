@@ -27,7 +27,6 @@ interface _Comment {
   thread: number
   content: string
   creator: User
-  isAnswer: boolean
 }
 
 interface ThreadCreationViewProps {
