@@ -46,6 +46,10 @@ interface ThreadProps {
   comments: _Comment[]
 }
 
+interface commentProps {
+  comment: _Comment
+}
+
 interface ThreadCreationViewProps {
   loggedInUser: User;
 }

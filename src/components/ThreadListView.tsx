@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Thread from './Thread';
+import CommentComponent from './CommentComponent';
 import '../styles/TreadListView.css';
 
 // Function to save a thread to localStorage
@@ -36,34 +37,18 @@ function saveCommentToLocalStorage(commentData: _Comment) {
 
 
 /* const newComment: _Comment = {
-  id: 9,
-  thread: 9,
-  content: 'Bra tråd detta!',
+  id: 2,
+  thread: 1,
+  content: 'Mickes exempel',
   creator: {
     id: 1,
     name: 'Gustav',
-    userName: 'Gusten'
+    userName: 'Gusten',
+    password: '123'
   },
   isAnswer: true
 }
 saveCommentToLocalStorage(newComment) */
-
-/* const newThread: Thread | QNAThread = {
-  id: 3,
-  title: 'Vanlig tråd som INTE är QNA',
-  category: 'THREAD',
-  creationDate: 'idag',
-  description: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-  creator: {
-    id: 3,
-    name: 'Banan Mannen',
-    userName: 'Banana',
-  },
-  
-  
-};
-
-saveThreadToLocalStorage(newThread); */
 //--------------------------------------------------------------------------------------------------
 function ThreadListView() {
 const [comments, setComments] = useState<(_Comment)[]>([])
@@ -89,7 +74,9 @@ useEffect(() => {
     <div >
       {threads.map((thread) => (
         <Thread thread={thread} comments={comments.filter((comments) => comments.thread === thread.id)} />
+        
       ))}
+      
     </div>
   );
 }
