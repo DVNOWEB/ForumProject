@@ -41,6 +41,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         creationDate: new Date().toString(),
         description,
         creator: loggedInUser,
+        comments:[],
       };
   
       saveThreadToLocalStorage(newThread)
@@ -59,6 +60,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         commentAnswerId: 1,
         description,
         creator: loggedInUser,
+        comments:[],
       };
   
       saveThreadToLocalStorage(newQNAThread)

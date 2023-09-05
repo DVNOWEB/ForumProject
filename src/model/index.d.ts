@@ -14,7 +14,7 @@ interface Thread {
   creationDate: string
   description: string
   creator: User
-  // comments: Comment[];
+  comments: _Comment[];
 
 }
 
@@ -57,10 +57,12 @@ interface ThreadCreationViewProps {
 }
 
 
-
 interface AuthFormProps {
   setLoggedInUser: (user: User | null) => void;
   loggedInUser: User | null;
 }
 
-
+// Define the props required for the AddComment component
+interface AddCommentProps {
+  onSubmit: (content: string) => void; // Function to handle comment submission
+}
