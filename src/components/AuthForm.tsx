@@ -120,7 +120,11 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
     <div className="main_container">
       <div className="header">
         <h1>Online Forum</h1>
-        <span>{isRegistered ? 'Log in' : 'Register'}</span>
+        {localStorage.getItem('loggedInUser') ? (
+          <span>Logged in: {new Date().toISOString().split('T')[0]}</span>
+        ) : (
+          <span>{isRegistered ? 'Log in' : 'Register'}</span>
+        )}
       </div>
       {localStorage.getItem('loggedInUser') ? (
         <div className="welcome_div">
