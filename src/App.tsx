@@ -5,8 +5,6 @@
 
 // import ThreadListView from './components/ThreadListView';
 
-
-
 // function App() {
 //   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 
@@ -38,12 +36,9 @@ function App() {
       <AuthForm setLoggedInUser={setLoggedInUser} />
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
-      <div className="ThreadListContainer">
-        <ThreadListView />
-      </div>
+      <ThreadListView />
     </div>
   )
 }
 
 export default App
-

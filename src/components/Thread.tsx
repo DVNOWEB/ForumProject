@@ -18,12 +18,10 @@ function Thread({ thread, comments }: ThreadProps) {
 
   return (
     <div className='threadContainer'>
+      <div>
       <h2>{thread.title}</h2>
-      <p>Category: {thread.category}</p>
-      <p>Creation Date: {thread.creationDate}</p>
       <p>Creator: {thread.creator.name}</p>
       <p>Description: {thread.description}</p>
-      
       {thread.category === 'QNA' && 'isAnswered' in thread && thread.isAnswered === true &&(
         <div>
           <h3>Answered!</h3>
@@ -31,11 +29,17 @@ function Thread({ thread, comments }: ThreadProps) {
           <p>By: {answer?.creator.userName}</p>
         </div>
       )}
+      </div>
+      <div>
+      <p>Category: {thread.category}</p>
+      <p>Creation Date: {thread.creationDate}</p>
       {thread.category === 'QNA' && 'isAnswered' in thread && thread.isAnswered === false &&(
         <div>
           <h3>This QNA is not yet answered</h3>
         </div>
       )}
+      </div>
+      
     </div>
   );
 };
