@@ -27,7 +27,6 @@ interface _Comment {
   thread: number
   content: string
   creator: User
-  isAnswer: boolean
 }
 
 interface ThreadCreationViewProps {
@@ -44,6 +43,10 @@ interface AuthFormProps {
 interface ThreadProps {
   thread: Thread | QNAThread
   comments: _Comment[]
+}
+
+interface commentProps {
+  comment: _Comment
 }
 
 interface ThreadCreationViewProps {
