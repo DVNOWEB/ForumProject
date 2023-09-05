@@ -1,16 +1,19 @@
+
+
+
 import React, { useEffect, useState } from 'react'
 import '../styles/AuthForm.css'
 
-function AuthForm() {
-  const [email, setEmail] = useState('')
+function AuthForm({ loggedInUser, setLoggedInUser}: AuthFormProps) {
+  const [name, setName] = useState('')
+  const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [isRegistered, setIsRegistered] = useState(true)
-  const [loggedInUser, setLoggedInUser] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [messageColor, setMessageColor] = useState<string | null>(null)
 
-  // This useEffect runs once when the component is mounted
   useEffect(() => {
+    // Load user data from local storage on component mount
     const storedUsers = localStorage.getItem('users')
     if (storedUsers) {
       const parsedUsers = JSON.parse(storedUsers)
@@ -18,86 +21,131 @@ function AuthForm() {
     }
   }, [])
 
+  const generateUserId = () => {
+    return Math.floor(Math.random() * 1000)
+  }
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Clear any existing message
     setMessage(null)
     setMessageColor(null)
 
-    // Check if user is logging out
-    if (!email && !password && loggedInUser) {
-      // Do not remove user data from localStorage
+    if (!name && !userName && !password && loggedInUser) {
+      // Handle logout logic
       setLoggedInUser(null)
-      setEmail('')
+      setName('')
+      setUserName('')
       setPassword('')
       setMessage('Logged out successfully.')
       setMessageColor('green')
       setTimeout(() => {
         setMessage(null)
         setMessageColor(null)
-      }, 3000) // Clear message after 3 seconds
+      }, 3000)
       return
     }
 
-    // Validate and save the user to localStorage
-    if (email && password) {
+    if (name && userName && password) {
       const storedUsers = localStorage.getItem('users')
       const users = storedUsers ? JSON.parse(storedUsers) : []
 
-      const userExists = users.some((user: any) => user.email === email)
+      const userExists = users.some((user: User) => user.userName === userName)
 
       if (userExists) {
-        setMessage('User already exists. Login instead.')
+        // Find the user by email
+        const existingUser = users.find((user: User) => user.userName === userName)
+        if (existingUser && existingUser.name === name) {
+          // Redirect to welcome page if the name matches
+          setLoggedInUser(existingUser)
+          return
+        }
+
+        setMessage('User already exists. Log in instead.')
         setMessageColor('red')
         return
       }
 
-      const newUser = { email, password }
+      if (isRegistered) {
+        setMessage('User not registered. Please register first.')
+        setMessageColor('red')
+        return
+      }
+
+      const newUser = { id: generateUserId(), name, userName, password }
       users.push(newUser)
       localStorage.setItem('users', JSON.stringify(users))
 
-      setLoggedInUser(email)
-      setIsRegistered(true) // Reset to login form
-      setEmail('')
+      setLoggedInUser(newUser)
+      setIsRegistered(true)
+      setUserName('')
       setPassword('')
       setMessage('Registration successful.')
       setMessageColor('green')
     } else {
-      setMessage('Please fill in both email and password.')
+      setMessage('Please fill in all fields.')
       setMessageColor('red')
     }
 
     setTimeout(() => {
       setMessage(null)
       setMessageColor(null)
-    }, 3000) // Clear message after 3 seconds
+    }, 3000)
+  }
+
+  const handleLogout = () => {
+    setLoggedInUser(null)
+    setName('')
+    setUserName('')
+    setPassword('')
+    setMessage('Logged out successfully.')
+    setMessageColor('green')
+    setTimeout(() => {
+      setMessage(null)
+      setMessageColor(null)
+    }, 3000)
   }
 
   return (
+    
+      
     <div className="main_container">
+      <div className="header">
+        <h1>Online Forum</h1>
+        <span>Login or register</span>
+      </div>
       {loggedInUser ? (
-        <div>
-          <h2>Welcome, {loggedInUser}!</h2>
-          <button onClick={handleFormSubmit}>Log Out</button>
+        <div className='welcome_div'>
+          <h2>Welcome, {name || 'User'}!</h2>
+          <button onClick={handleLogout}>Log Out</button>
         </div>
       ) : (
-        <div>
-          <h2 style={{ color: messageColor || '' }}>{message}</h2>
+        <div className="form_container">
           <h2>{isRegistered ? 'Log in' : 'Register'}</h2>
           <form onSubmit={handleFormSubmit}>
             <div>
-              <label>Email:</label>
+              <label htmlFor="Name">Name:</label>
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                id="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
-              <label>Password:</label>
+              <label htmlFor="Email">Email:</label>
+              <input
+                type="email"
+                id="Email"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="Password">Password:</label>
               <input
                 type="password"
+                id="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -115,6 +163,7 @@ function AuthForm() {
                 : 'Already have an account? Log in here.'}
             </button>
           </div>
+          <h2 style={{ color: messageColor || '' }}>{message}</h2>
         </div>
       )}
     </div>
