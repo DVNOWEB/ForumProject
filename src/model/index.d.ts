@@ -32,6 +32,10 @@ interface _Comment {
   isAnswer: boolean
 }
 
+interface commentProps {
+  comment: _Comment
+}
+
 interface ThreadCreationViewProps {
   loggedInUser: User;
 }
@@ -51,6 +55,7 @@ interface ThreadProps {
 interface ThreadCreationViewProps {
   loggedInUser: User;
 }
+
 
 
 interface AuthFormProps {
