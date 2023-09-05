@@ -19,7 +19,7 @@ function App() {
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
       <div className="ThreadListContainer">
-        <ThreadListView />
+        {/* <ThreadListView /> */}
       </div>
       <ThreadDetailView />
     </div>
