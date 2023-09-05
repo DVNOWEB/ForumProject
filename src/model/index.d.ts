@@ -35,10 +35,15 @@ interface ThreadCreationViewProps {
 }
 
 
-interface AuthFormProps {
-  setLoggedInUser: (user: User | null) => void;
-  loggedInUser: User | null;
+// interface AuthFormProps {
+//   setLoggedInUser: (user: User | null) => void;
+//   loggedInUser: User | null;
 
+// }
+
+interface AuthFormProps {
+  loggedInUser: User | null
+  setLoggedInUser: (user: User | null) => void
 }
 
 interface ThreadProps {
@@ -51,9 +56,5 @@ interface ThreadCreationViewProps {
 }
 
 
-interface AuthFormProps {
-  setLoggedInUser: (user: User | null) => void;
-  loggedInUser: User | null;
-}
 
 
