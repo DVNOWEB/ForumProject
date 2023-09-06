@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./details.css";
-import Thread from "../Thread";
-import CommentComponent from "./CommentComponent";
-import AddComment from "./AddComment";
+import "../styles/ThreadDetailView.css";
+import AuthForm from "./AuthForm";
+import Thread from "./Thread";
+import CommentComponent from "./details/CommentComponent";
+import AddComment from "./details/AddComment";
 import { on } from "events";
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-function ThreadDetailView() {
+const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   // Create an instance of the Thread type
 
   const [thread, setThread] = useState<Thread | QNAThread>();
   const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
+  const [content, setContent] = useState<string>("")
+  const propsId = 2
 
 
   //Hämtar Threads från localstorage.
@@ -24,32 +27,13 @@ function ThreadDetailView() {
 
 
       //Lägger threaden vi är inne på i en variabel.
-      const desiredThreadId: number = 1;
+      const desiredThreadId: number = propsId;
       const selected = parsedThreads.find(
         (thread) => thread.id === desiredThreadId
       );
       setThread(selected);
     }
   }, []);
-
-
-
-
-//Hårdkodat exempel
-  const newComment = {
-    id: 1,
-    thread: 1,
-    content: "This is a sample comment.",
-    creator: {
-      id: 1,
-      name: "John Doe",
-      userName: "johndoe",
-      password: "123456",
-    },
-    isAnswer: false,
-  };
-
-  const [onClick, setOnClick] = useState(false);
 
 
 //Tar Den gamla arrayen, söker igenom den efter rätt thread och uppdaterar med ny thread + kommentarer
@@ -79,10 +63,21 @@ function ThreadDetailView() {
 
 
 
-  //När vi klickar på submit
-  useEffect(() => {
-    const addComment = (newComment: _Comment) => {
-      if (thread) {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (content.length < 1) {
+      return
+    }
+        if(thread) {
+        const newComment: _Comment =  {
+        id: thread.comments.length + 1,
+        thread: propsId,
+        content: content,
+        creator: loggedInUser,
+      }
+      const addComment = (newComment: _Comment) => {
+      
         const updatedThread: Thread = {
           ...thread,
           comments: [...thread.comments, newComment],
@@ -91,19 +86,31 @@ function ThreadDetailView() {
         setThread(updatedThread);
         //Funktion som uppdaterar listan vi parsade med nya
         pushNewThread(threadsArray, updatedThread);
-      }
+      
     };
     addComment(newComment);
-  }, [onClick]);
+    }
+  }
+
+
+
 
 
 
   
   return (
     <div className="details-container">
-      
-      <button onClick={() => setOnClick((state) => !state)}>Submit</button>
-      
+
+      <form onSubmit={handleSubmit} className="form" action="submit">
+          <input
+            type="text"
+            placeholder="Write your comment here..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <button className="addComment-btn">Add comment</button>
+      </form>
+            
     </div>
   );
 }

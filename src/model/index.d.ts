@@ -39,6 +39,10 @@ interface ThreadCreationViewProps {
   loggedInUser: User;
 }
 
+interface ThreadDetailViewProps {
+  loggedInUser: User;
+}
+
 
 interface AuthFormProps {
   setLoggedInUser: (user: User | null) => void;
