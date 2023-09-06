@@ -40,8 +40,8 @@ function App() {
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
       {/* <ThreadListView /> */}
-    </div>
       <ThreadDetailView />
+    </div>
   )
 }
 
