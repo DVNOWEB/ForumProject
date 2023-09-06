@@ -35,7 +35,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0')
     const day = currentDate.getDate().toString().padStart(2, '0')
 
-    return `${year}/${month}/${day}`
+    return `${year}-${month}-${day}`
   }
 
   const handleSubmit = (e: React.FormEvent) => {

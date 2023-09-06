@@ -82,18 +82,22 @@ function Thread({
       <div>
         {isDeleting ? (
           <div>
-            <p>Confirm deletion: {thread.title}</p>
             <button onClick={handleConfirmDelete}>Yes, Delete</button>
             <button onClick={() => setIsDeleting(false)}>Cancel</button>
           </div>
         ) : (
           <>
-            <button className="btn_edit" onClick={handleEdit}>
-              <FaEdit />
-            </button>
-            <button className="btn_delete" onClick={handleDelete}>
-              <FaTrashAlt />
-            </button>
+            <div>
+              <div>
+                <span>{thread.creationDate}</span>
+              </div>
+              <button className="btn_edit" onClick={handleEdit}>
+                <FaEdit />
+              </button>
+              <button className="btn_delete" onClick={handleDelete}>
+                <FaTrashAlt />
+              </button>
+            </div>
           </>
         )}
       </div>
