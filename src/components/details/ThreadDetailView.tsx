@@ -9,40 +9,33 @@ import { on } from "events";
 
 function ThreadDetailView() {
   // Create an instance of the Thread type
-  const threadDetail: Thread = {
-    id: 1,
-    title: "Sample Thread",
-    category: "THREAD",
-    creationDate: "2023-09-04",
-    description: "This is a sample thread.",
-    creator: {
-      id: 1,
-      name: "John Doe",
-      userName: "johndoe",
-      password: "string",
-    },
-    comments: [],
-  };
 
-  // const [threads, setThreads] = useState([threadDetail]);
   const [thread, setThread] = useState<Thread | QNAThread>();
+  const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
 
+
+  //Hämtar Threads från localstorage.
   useEffect(() => {
     const threadData: string | null = localStorage.getItem("threads");
-    // console.log(threadData);
     if (threadData) {
       const parsedThreads: Thread[] | QNAThread[] = JSON.parse(threadData);
+      //Lägger alla threads i en array
+      setThreadsArray(parsedThreads);
 
+
+      //Lägger threaden vi är inne på i en variabel.
       const desiredThreadId: number = 1;
       const selected = parsedThreads.find(
         (thread) => thread.id === desiredThreadId
       );
-      // console.log(selected)
       setThread(selected);
     }
   }, []);
-  // console.log(thread);
 
+
+
+
+//Hårdkodat exempel
   const newComment = {
     id: 1,
     thread: 1,
@@ -55,14 +48,38 @@ function ThreadDetailView() {
     },
     isAnswer: false,
   };
-  // console.log(newComment);
 
-  const [onClick, setOnClick] = useState(false)
-
+  const [onClick, setOnClick] = useState(false);
 
 
+//Tar Den gamla arrayen, söker igenom den efter rätt thread och uppdaterar med ny thread + kommentarer
+  const pushNewThread = (threadsArray: Thread[], newThread: Thread) => {
+    const index = threadsArray.findIndex(
+      (thread) => thread.id === newThread.id
+    );
+
+      const updatedThreadsArray: Thread[] = threadsArray;
+
+      if (index !== -1) {
+        updatedThreadsArray[index] = newThread;
+      } else {
+        updatedThreadsArray.push(newThread);
+      }
+
+      if (!updatedThreadsArray) {
+        return;
+      }
+      const data = JSON.stringify(updatedThreadsArray);
+      if (!data) {
+        return;
+      }
+    localStorage.setItem("threads", data);
+    setThreadsArray(updatedThreadsArray)
+  };
 
 
+
+  //När vi klickar på submit
   useEffect(() => {
     const addComment = (newComment: _Comment) => {
       if (thread) {
@@ -70,46 +87,23 @@ function ThreadDetailView() {
           ...thread,
           comments: [...thread.comments, newComment],
         };
-        
+        //Uppdaterar så att nya kommentarer läggs till + gamla
         setThread(updatedThread);
-        console.log(updatedThread)
+        //Funktion som uppdaterar listan vi parsade med nya
+        pushNewThread(threadsArray, updatedThread);
       }
     };
     addComment(newComment);
-    // console.log(newComment);
-  }, [onClick])
+  }, [onClick]);
+
+
+
   
-
-
-
-
-  //-----------------------------------------------------------------
-  //   // Existing comments
-  //   {
-  //     id: 1,
-  //     thread: 1,
-  //     content: "This is a sample comment.",
-  //     creator: {
-  //       id: 1,
-  //       name: "John Doe",
-  //       userName: "johndoe",
-  //       password: "123456",
-  //     },
-  //     isAnswer: false,
-  //   },
-  // ]);
-  // const [comments, setComments] = useState<_Comment[]>([
-
   return (
-    
     <div className="details-container">
-      {/* {thread && <Thread thread={thread} comments={comments} />} */}
-
-      {/* <AddComment /> */}
-    <button onClick={() => setOnClick(state => !state)}>Submit</button>
-      {/* {comments.map((comment) => (
-      <CommentComponent comment={comment} />
-    ))}    */}
+      
+      <button onClick={() => setOnClick((state) => !state)}>Submit</button>
+      
     </div>
   );
 }
