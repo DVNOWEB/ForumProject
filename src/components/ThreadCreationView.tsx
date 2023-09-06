@@ -73,8 +73,6 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       saveThreadToLocalStorage(newQNAThread)
       setTitle('')
       setDescription('')
-  } else {
-    console.log('Error: Invalid category')
   }
 }
 
