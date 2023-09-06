@@ -1,4 +1,4 @@
-import ThreadDetailView from './components/details/ThreadDetailView';
+import ThreadDetailView from './components/ThreadDetailView';
 
 import { useState } from 'react'
 import AuthForm from './components/AuthForm'
@@ -14,7 +14,7 @@ function App() {
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
       <ThreadListView />
-      <ThreadDetailView />
+      {loggedInUser && <ThreadDetailView loggedInUser={loggedInUser} />}
     </div>
   )
 }
