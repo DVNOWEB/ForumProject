@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../styles/ThreadCreationView.css'
 
 const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
@@ -6,13 +6,12 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
   const [category, setCategory] = useState<ThreadCategory>('THREAD')
   const [description, setDescription] = useState<string>('')
 
-  //Om vi vill få tag på den här globalt, flytta ut till Context/redux
+  // Om vi vill få tag på den här globalt, flytta ut till Context/redux
   const [threadsArray, setThreadsArray] = useState([])
-
 
   const saveThreadToLocalStorage = (threadData: Thread | QNAThread) => {
     try {
-      //Hämtar hem data från local
+      // Hämtar hem data från local
       const existingData = localStorage.getItem('threads')
       const existingThreads = existingData ? JSON.parse(existingData) : []
       existingThreads.push(threadData)
@@ -24,6 +23,15 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     }
   }
 
+  const formatCurrentDate = () => {
+    const currentDate = new Date()
+    const year = currentDate.getFullYear()
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0') // Ensure two digits
+    const day = currentDate.getDate().toString().padStart(2, '0') // Ensure two digits
+
+    return `${year}/${month}/${day}`
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -31,31 +39,30 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       return
     }
 
-    if (category === "THREAD") {
-
-      //Följer Thread
+    if (category === 'THREAD') {
+      // Följer Thread
       const newThread: Thread = {
         id: threadsArray.length + 1,
         title,
         category,
-        creationDate: new Date().toString(),
+        creationDate: formatCurrentDate(), // Format the creationDate as "year/month/day"
         description,
         creator: loggedInUser,
         comments:[],
-      };
-  
-      saveThreadToLocalStorage(newThread)
+      } 
+      
+      saveThreadToLocalStorage(newThread) 
       setTitle('')
       setDescription('')
-    }
+    } 
 
-    if (category === "QNA") {
-       //Följer QNAThread
-       const newQNAThread: QNAThread = {
+    if (category === 'QNA') {
+      // Följer QNAThread
+      const newQNAThread: QNAThread = {
         id: threadsArray.length + 1,
         title,
         category,
-        creationDate: new Date().toString(),
+        creationDate: formatCurrentDate(), // Format the creationDate as "year/month/day"
         isAnswered: false,
         commentAnswerId: 1,
         description,
@@ -66,15 +73,10 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       saveThreadToLocalStorage(newQNAThread)
       setTitle('')
       setDescription('')
-
-
-    }
-    else {
-      console.log("Something went wrong")
-    }
-
-  };
-
+  } else {
+    console.log('Error: Invalid category')
+  }
+}
 
   return (
     <div className="threadCreationView_container">
@@ -101,7 +103,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
             className="description"
             name=""
             id=""
-            placeholder='Write your message here...'
+            placeholder="Write your message here..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}></textarea>
           <button>Create</button>
@@ -111,4 +113,6 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
   )
 }
 
+
 export default ThreadCreationView
+

@@ -29,7 +29,6 @@ interface _Comment {
   thread: number
   content: string
   creator: User
-  isAnswer: boolean
 }
 
 interface commentProps {
@@ -44,12 +43,16 @@ interface ThreadCreationViewProps {
 interface AuthFormProps {
   setLoggedInUser: (user: User | null) => void;
   loggedInUser: User | null;
-
 }
+
 
 interface ThreadProps {
   thread: Thread | QNAThread
   comments: _Comment[]
+}
+
+interface commentProps {
+  comment: _Comment
 }
 
 interface ThreadCreationViewProps {
@@ -57,10 +60,6 @@ interface ThreadCreationViewProps {
 }
 
 
-interface AuthFormProps {
-  setLoggedInUser: (user: User | null) => void;
-  loggedInUser: User | null;
-}
 
 // Define the props required for the AddComment component
 interface AddCommentProps {

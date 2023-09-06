@@ -1,11 +1,20 @@
 
 .threadContainer{
-    width: 1000px;
     display: flex;
-    flex-direction: column;
-    border-radius: 2rem;
-    border: 1px solid black;
+    flex-direction: row;
+    align-items: top;
+    justify-content: space-between;
+    width: 80%;
+    height: 50%;
+    box-shadow: 0 2px 3px #9d9c9c;
     padding: 1rem;
-    margin: 1rem;
+    margin-bottom: 1rem;
 
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.threadContainer:hover{
+    background-color: #e6e6e6;
+    box-shadow: 0 2px 3px #e6e6e6;
 }
