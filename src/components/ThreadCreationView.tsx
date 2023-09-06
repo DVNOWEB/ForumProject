@@ -48,12 +48,13 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         creationDate: formatCurrentDate(), // Format the creationDate as "year/month/day"
         description,
         creator: loggedInUser,
-      }
-
-      saveThreadToLocalStorage(newThread)
+        comments:[],
+      } 
+      
+      saveThreadToLocalStorage(newThread) 
       setTitle('')
       setDescription('')
-    }
+    } 
 
     if (category === 'QNA') {
       // Följer QNAThread
@@ -66,18 +67,16 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         commentAnswerId: 1,
         description,
         creator: loggedInUser,
-      }
-
+        comments:[],
+      };
+  
       saveThreadToLocalStorage(newQNAThread)
       setTitle('')
       setDescription('')
-    } else {
-      console.log('Something went wrong')
-    }
-
-    // Reload the page after successfully creating the thread
-    window.location.reload()
+  } else {
+    console.log('Error: Invalid category')
   }
+}
 
   return (
     <div className="threadCreationView_container">
@@ -113,6 +112,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     </div>
   )
 }
+
 
 export default ThreadCreationView
 

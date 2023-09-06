@@ -40,6 +40,5 @@ import '../styles/Thread.css'
       
     </div>
   );
-};
-
+}
 export default Thread;

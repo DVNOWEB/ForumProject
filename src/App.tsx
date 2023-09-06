@@ -19,6 +19,9 @@
 //     </div>
 //   );
 // }
+import ThreadDetailView from './components/details/ThreadDetailView';
+
+
 
 // export default App;
 
@@ -37,6 +40,7 @@ function App() {
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
       <ThreadListView />
+      <ThreadDetailView />
     </div>
   )
 }
