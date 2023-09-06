@@ -14,6 +14,8 @@ interface Thread {
   creationDate: string
   description: string
   creator: User
+  comments: _Comment[];
+
 }
 
 interface QNAThread extends Thread {
@@ -27,6 +29,10 @@ interface _Comment {
   thread: number
   content: string
   creator: User
+}
+
+interface commentProps {
+  comment: _Comment
 }
 
 interface ThreadCreationViewProps {
@@ -55,4 +61,7 @@ interface ThreadCreationViewProps {
 
 
 
-
+// Define the props required for the AddComment component
+interface AddCommentProps {
+  onSubmit: (content: string) => void; // Function to handle comment submission
+}

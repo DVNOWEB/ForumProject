@@ -1,0 +1,22 @@
+/* .details-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    border: solid 1px;
+}
+
+.details-comment {
+    border-bottom: solid 1px;
+    padding: .3rem .3rem 0 .3rem ;
+}
+
+.details-input {
+    padding: 1rem;
+    margin-top: -1rem;
+} */
+
+.addComment-btn {
+    background-color: blue;
+    color: white;
+}
