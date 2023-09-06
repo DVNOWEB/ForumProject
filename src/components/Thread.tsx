@@ -14,6 +14,7 @@ function Thread({
   const [editedTitle, setEditedTitle] = useState(thread.title)
   const [editedDescription, setEditedDescription] = useState(thread.description)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     if ('isAnswered' in thread && thread.isAnswered === true) {
@@ -22,7 +23,11 @@ function Thread({
         comments.find((comment) => comment.id === qnaThread.commentAnswerId)
       )
     }
-  }, [thread, comments])
+    if (refresh) {
+      // Reset the refresh state after rendering
+      setRefresh(false)
+    }
+  }, [thread, comments, refresh])
 
   const handleEdit = () => {
     setIsEditing(true)
@@ -89,14 +94,28 @@ function Thread({
           <>
             <div>
               <div>
+                <div>
+                  <span>{thread.category}</span>
+                </div>
                 <span>{thread.creationDate}</span>
               </div>
+              { loggedInUser ? (
+                <>
               <button className="btn_edit" onClick={handleEdit}>
                 <FaEdit />
               </button>
               <button className="btn_delete" onClick={handleDelete}>
                 <FaTrashAlt />
               </button>
+              </>
+              )
+              : null
+              }
+              
+              
+            </div>
+            <div>
+              <span>{comments.length} comments</span>
             </div>
           </>
         )}

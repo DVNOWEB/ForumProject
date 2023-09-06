@@ -53,6 +53,14 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
 
   }, [])
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser)
+      setLoggedInUser(user)
+    }
+  }, [loggedInUser])
+
   const handleThreadUpdate = (updatedThread: Thread) => {
     const updatedThreads = threads.map((thread) =>
       thread.id === updatedThread.id ? updatedThread : thread

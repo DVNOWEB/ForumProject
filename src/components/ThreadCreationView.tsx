@@ -8,13 +8,19 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
 
   const [threadsArray, setThreadsArray] = useState([])
   const [nextThreadId, setNextThreadId] = useState(1) // Initialize with 1
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     // When the component mounts, set the nextThreadId to the next available ID
     const existingData = localStorage.getItem('threads')
     const existingThreads = existingData ? JSON.parse(existingData) : []
+    if (refresh) {
+      // Reset the refresh state after rendering
+      setRefresh(false)
+    }
     setNextThreadId(existingThreads.length + 1)
-  }, [])
+  }, [refresh])
+
 
   const saveThreadToLocalStorage = (threadData: Thread | QNAThread) => {
     try {
@@ -84,8 +90,9 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     // Increment the next available ID for the next thread
     setNextThreadId(nextThreadId + 1)
 
-    // Reload the page after successfully creating the thread
-    window.location.reload()
+    // // Reload the page after successfully creating the thread
+    // window.location.reload()
+    setRefresh(true)
   }
 
   return (
