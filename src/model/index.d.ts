@@ -69,3 +69,5 @@ interface ThreadCreationViewProps {
 interface AddCommentProps {
   onSubmit: (content: string) => void; // Function to handle comment submission
 }
+
+
