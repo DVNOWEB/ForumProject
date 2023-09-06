@@ -39,7 +39,7 @@ function App() {
       <AuthForm setLoggedInUser={setLoggedInUser} />
       {/* Pass loggedInUser and threads to ThreadCreationView */}
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
-      {/* <ThreadListView /> */}
+      <ThreadListView />
       <ThreadDetailView />
     </div>
   )
