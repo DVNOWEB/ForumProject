@@ -1,40 +1,41 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/ThreadCreationView.css'
 
 const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
+  // State variables to manage the form inputs
   const [title, setTitle] = useState<string>('')
   const [category, setCategory] = useState<ThreadCategory>('THREAD')
   const [description, setDescription] = useState<string>('')
 
-  const [threadsArray, setThreadsArray] = useState([])
-  const [nextThreadId, setNextThreadId] = useState(1) // Initialize with 1
-  const [refresh, setRefresh] = useState(false)
+  // State to track the next available thread ID
+  const [nextThreadId, setNextThreadId] = useState<number>(1)
 
   useEffect(() => {
     // When the component mounts, set the nextThreadId to the next available ID
     const existingData = localStorage.getItem('threads')
     const existingThreads = existingData ? JSON.parse(existingData) : []
-    if (refresh) {
-      // Reset the refresh state after rendering
-      setRefresh(false)
-    }
+
     setNextThreadId(existingThreads.length + 1)
-  }, [refresh])
+  }, [])
 
-
+  // Function to save a thread to localStorage
   const saveThreadToLocalStorage = (threadData: Thread | QNAThread) => {
     try {
       const existingData = localStorage.getItem('threads')
       const existingThreads = existingData ? JSON.parse(existingData) : []
+
+      // Add the new thread data to the existing threads
       existingThreads.push(threadData)
 
+      // Update localStorage with the updated threads
       localStorage.setItem('threads', JSON.stringify(existingThreads))
-      setThreadsArray(existingThreads)
     } catch (error) {
-      console.log(error)
+      console.error('Error saving thread to localStorage:', error)
+      // Handle the error here, e.g., display a message to the user
     }
   }
 
+  // Function to format the current date in 'YYYY-MM-DD' format
   const formatCurrentDate = () => {
     const currentDate = new Date()
     const year = currentDate.getFullYear()
@@ -44,16 +45,21 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     return `${year}-${month}-${day}`
   }
 
+  // Function to handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Check if the title and description fields are not empty
     if (title.length < 1 || description.length < 1) {
       return
     }
 
+    let newThread: Thread | QNAThread | null = null
+
     if (category === 'THREAD') {
-      const newThread: Thread = {
-        id: nextThreadId, // Use the next available ID
+      // Create a new thread object for the 'THREAD' category
+      newThread = {
+        id: nextThreadId,
         title,
         category,
         creationDate: formatCurrentDate(),
@@ -61,15 +67,10 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         creator: loggedInUser,
         comments: [],
       }
-
-      saveThreadToLocalStorage(newThread)
-      setTitle('')
-      setDescription('')
-    }
-
-    if (category === 'QNA') {
-      const newQNAThread: QNAThread = {
-        id: nextThreadId, // Use the next available ID
+    } else if (category === 'QNA') {
+      // Create a new Q'n'A thread object for the 'QNA' category
+      newThread = {
+        id: nextThreadId,
         title,
         category,
         creationDate: formatCurrentDate(),
@@ -79,20 +80,24 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         creator: loggedInUser,
         comments: [],
       }
-
-      saveThreadToLocalStorage(newQNAThread)
-      setTitle('')
-      setDescription('')
     } else {
-      console.log('Error: Invalid category')
+      console.error('Error: Invalid category')
+      // Handle the error here, e.g., display a message to the user
     }
 
-    // Increment the next available ID for the next thread
-    setNextThreadId(nextThreadId + 1)
+    if (newThread) {
+      // Save the new thread to localStorage
+      saveThreadToLocalStorage(newThread)
 
-    // // Reload the page after successfully creating the thread
-    // window.location.reload()
-    setRefresh(true)
+      // Clear the form inputs
+      setTitle('')
+      setDescription('')
+
+      // Increment the next available ID for the next thread
+      setNextThreadId(nextThreadId + 1)
+    }
+    // Reload the page after successfully creating the thread
+    window.location.reload()
   }
 
   return (

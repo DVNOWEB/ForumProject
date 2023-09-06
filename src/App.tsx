@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import AuthForm from './components/AuthForm'
 import ThreadCreationView from './components/ThreadCreationView'
 import ThreadListView from './components/ThreadListView'

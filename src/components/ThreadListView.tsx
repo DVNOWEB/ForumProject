@@ -1,66 +1,43 @@
-// import React, { useEffect, useState } from 'react';
-// import Thread from './Thread';
-// import '../styles/TreadListView.css';
-
-// function ThreadListView() {
-// const [comments, setComments] = useState<(_Comment)[]>([])
-// const [threads, setThreads] = useState<(Thread)[] | (QNAThread)[]>([])
-// useEffect(() => {
-//     const threadData: string|null = localStorage.getItem('threads')
-//     const commentData: string|null = localStorage.getItem('comments')
-//     if(threadData) {
-//       const parsedThreads: Thread[]|QNAThread[] = JSON.parse(threadData)
-//       setThreads(parsedThreads)
-//     }
-//     if(commentData) {
-//       const parsedComments: _Comment[] = JSON.parse(commentData)
-//       setComments(parsedComments)
-//     }
-  
-// }, [])
-
-
-//   return (
-//     <div className="ThreadListContainer">
-//       {threads.map((thread) => (
-//         <Thread thread={thread} comments={comments.filter((comments) => comments.thread === thread.id)} />
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default ThreadListView;
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Thread from './Thread'
 import '../styles/TreadListView.css'
 
 function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
+  // State to store comments and the logged-in user
   const [comments, setComments] = useState<_Comment[]>([])
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null)
 
+  // Load threads and comments from localStorage when the component mounts
   useEffect(() => {
-      const threadData: string|null = localStorage.getItem('threads')
-      const commentData: string|null = localStorage.getItem('comments')
-      if(threadData) {
-        const parsedThreads: Thread[]|QNAThread[] = JSON.parse(threadData)
-        setThreads(parsedThreads)
-      }
-      if(commentData) {
-        const parsedComments: _Comment[] = JSON.parse(commentData)
-        setComments(parsedComments)
-      }
+    // Retrieve thread and comment data from localStorage
+    const threadData: string | null = localStorage.getItem('threads')
+    const commentData: string | null = localStorage.getItem('comments')
 
-  }, [])
+    if (threadData) {
+      // Parse and set threads from localStorage
+      const parsedThreads: (Thread | QNAThread)[] = JSON.parse(threadData)
+      setThreads(parsedThreads)
+    }
 
+    if (commentData) {
+      // Parse and set comments from localStorage
+      const parsedComments: _Comment[] = JSON.parse(commentData)
+      setComments(parsedComments)
+    }
+  }, [setThreads]) // Dependency array ensures this effect runs only once on component mount
+
+  // Load the logged-in user from localStorage when the component mounts
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedInUser')
-    if (loggedInUser) {
-      const user = JSON.parse(loggedInUser)
+    const loggedInUserData: string | null = localStorage.getItem('loggedInUser')
+
+    if (loggedInUserData) {
+      // Parse and set the logged-in user
+      const user = JSON.parse(loggedInUserData)
       setLoggedInUser(user)
     }
-  }, [loggedInUser])
+  }, []) // This effect runs only once on component mount
 
+  // Handle updating a thread
   const handleThreadUpdate = (updatedThread: Thread) => {
     const updatedThreads = threads.map((thread) =>
       thread.id === updatedThread.id ? updatedThread : thread
@@ -71,6 +48,7 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
     localStorage.setItem('threads', JSON.stringify(updatedThreads))
   }
 
+  // Handle deleting a thread
   const handleThreadDelete = (threadId: number) => {
     const updatedThreads = threads.filter((thread) => thread.id !== threadId)
     setThreads(updatedThreads)
@@ -78,7 +56,6 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
     // Update the threads in localStorage
     localStorage.setItem('threads', JSON.stringify(updatedThreads))
   }
-
 
   return (
     <div className="ThreadListContainer">
