@@ -74,6 +74,9 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     } else {
       console.log('Something went wrong')
     }
+
+    // Reload the page after successfully creating the thread
+    window.location.reload()
   }
 
   return (
