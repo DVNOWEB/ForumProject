@@ -73,12 +73,7 @@ function Thread({
   };
 
   return (
-<<<<<<< HEAD
-    
-    <Link to={`/${thread.id}`}  className="threadContainer">
-=======
     <Link to={`/${thread.id}`} className="threadContainer">
->>>>>>> 8fd03d2b44aad8e430a5db73640df4fed9c89d78
       <div>
         {threadData.isEditing ? (
           <div className="thread_input-container" onClick={(e: MouseEvent<HTMLElement>) => { 
