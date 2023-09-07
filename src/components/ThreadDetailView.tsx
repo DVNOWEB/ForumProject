@@ -14,8 +14,10 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   const [thread, setThread] = useState<Thread | QNAThread>();
   const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
   const [content, setContent] = useState<string>("")
-  const propsId = 2
 
+  const searchProps: string = window.location.pathname.split("/")[1]; 
+  const propsId: number = parseInt(searchProps);
+  console.log(propsId)
 
   //Hämtar Threads från localstorage.
   useEffect(() => {
@@ -100,9 +102,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   
   return (
     <div className="details-container">
-      <h1>Details</h1>
-      
-      {thread && <Thread thread={thread} comments={thread.comments} />}
+      {/* {thread &&  <Thread thread={thread} comments={thread?.comments} />} */}
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input
             type="text"
