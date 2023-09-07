@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from 'react'
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'
 import '../styles/Thread.css'
 import { MouseEvent } from 'react'
 
 import { Link } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
 
   function Thread({ thread, comments }: ThreadProps) {
   const [answer, setAnswer] = useState<(_Comment)>()
@@ -63,7 +62,7 @@ import { Link } from 'react-router-dom'
     <Link to={`/${thread.id}`} className="threadContainer">
       <div>
         {threadData.isEditing ? (
-          <div>
+          <div className="thread_input-container">
             <input
               type="text"
               value={threadData.editedTitle}
@@ -115,7 +114,7 @@ import { Link } from 'react-router-dom'
       <div>
         {threadData.isDeleting ? (
           <div>
-            <button onClick={handleConfirmDelete}>
+            <button className="btn_delete" onClick={handleConfirmDelete}>
               Yes, Delete
             </button>
             <button
@@ -124,6 +123,9 @@ import { Link } from 'react-router-dom'
                 e.preventDefault();
                 e.stopPropagation();
                   setThreadData((prevState) => ({
+              className="btn_edit"
+              onClick={() =>
+                setThreadData((prevState) => ({
                   ...prevState,
                   isDeleting: false,
                 }))}
@@ -132,14 +134,14 @@ import { Link } from 'react-router-dom'
             </button>
           </div>
         ) : (
-          <>
+          <div className="thread_right-box">
             <div>
               <div>
-                <div>
-                  <span>{thread.category}</span>
-                </div>
-                <span>{thread.creationDate}</span>
+                <span>{thread.category}</span>
               </div>
+              <span>{thread.creationDate}</span>
+            </div>
+            <div>
               {loggedInUser ? (
                 <>
                   <button className="btn_edit" onClick={handleEdit}>
@@ -154,7 +156,7 @@ import { Link } from 'react-router-dom'
             <div>
               <span>{comments.length} comments</span>
             </div>
-          </>
+          </div>
         )}
       </div>
     </Link>
