@@ -23,7 +23,7 @@ useEffect(() => {
   return (
     <div className="ThreadListContainer">
       {threads.map((thread) => (
-        <Thread thread={thread} comments={comments.filter((comments) => comments.thread === thread.id)} />
+        <Thread key={thread.id} thread={thread} comments={comments.filter((comments) => comments.thread === thread.id)} />
       ))}
     </div>
   );

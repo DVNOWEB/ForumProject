@@ -100,7 +100,9 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   
   return (
     <div className="details-container">
-
+      <h1>Details</h1>
+      
+      {thread && <Thread thread={thread} comments={thread.comments} />}
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input
             type="text"
@@ -110,6 +112,11 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
           />
           <button className="addComment-btn">Add comment</button>
       </form>
+      {thread && thread.comments && (
+        thread.comments.map((comment) => (
+          <CommentComponent comment={comment} />
+        ))  
+      )}
             
     </div>
   );
