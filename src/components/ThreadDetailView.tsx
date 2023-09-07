@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/ThreadDetailView.css";
+import CommentComponent from "./CommentComponent";
 
 
 
@@ -107,6 +108,11 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
           />
           <button className="addComment-btn">Add comment</button>
       </form>
+      {thread && thread.comments && (
+        thread.comments.map((comment) => (
+          <CommentComponent comment={comment} />
+        ))  
+      )}
             
     </div>
   );
