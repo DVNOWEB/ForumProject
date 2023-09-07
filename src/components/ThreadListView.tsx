@@ -63,7 +63,7 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
         <Thread
           key={thread.id}
           thread={thread}
-          comments={comments.filter((comment) => comment.thread === thread.id)}
+          comments={thread.comments}
           loggedInUser={loggedInUser}
           onUpdate={handleThreadUpdate}
           onDelete={handleThreadDelete}
