@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/ThreadDetailView.css";
-import AuthForm from "./AuthForm";
-import Thread from "./Thread";
-import CommentComponent from "./details/CommentComponent";
-import AddComment from "./details/AddComment";
-import { on } from "events";
+import CommentComponent from "./CommentComponent";
 
-//-------------------------------------------------------------------------------------------------------------------------
+
 
 const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   // Create an instance of the Thread type
@@ -112,6 +108,11 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
           />
           <button className="addComment-btn">Add comment</button>
       </form>
+      {thread && thread.comments && (
+        thread.comments.map((comment) => (
+          <CommentComponent comment={comment} />
+        ))  
+      )}
             
     </div>
   );
