@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
-import { FaTrashAlt, FaEdit } from 'react-icons/fa'
-import '../styles/Thread.css'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { MouseEvent } from 'react'
+import { useState, useEffect } from 'react';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import '../styles/Thread.css';
+import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
 function Thread({
   thread,
@@ -18,63 +17,60 @@ function Thread({
     editedTitle: thread.title,
     editedDescription: thread.description,
     isDeleting: false,
-  }
+  };
 
-  const [threadData, setThreadData] = useState(initialThreadData)
+  const [threadData, setThreadData] = useState(initialThreadData);
 
   useEffect(() => {
     if ('isAnswered' in thread && thread.isAnswered === true) {
-      const qnaThread = thread as QNAThread
+      const qnaThread = thread as QNAThread;
       setThreadData((prevState) => ({
         ...prevState,
-        answer:
-          comments.find(
-            (comment) => comment.id === qnaThread.commentAnswerId
-          ) || undefined, // Ensure the answer is either a _Comment or undefined
-      }))
+        answer: comments.find((comment) => comment.id === qnaThread.commentAnswerId) || undefined,
+      }));
     }
-  }, [thread, comments])
+  }, [thread, comments]);
+
+  const userIsCreator = loggedInUser && loggedInUser.id === thread.creator.id;
 
   const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    // Check if the logged-in user is the creator of the thread
-    if (loggedInUser && loggedInUser.id === thread.creator.id) {
-      setThreadData((prevState) => ({ ...prevState, isEditing: true }))
+    e.preventDefault();
+    e.stopPropagation();
+    if (userIsCreator) {
+      setThreadData((prevState) => ({ ...prevState, isEditing: true }));
     }
-  }
+  };
 
   const handleSave = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (loggedInUser && loggedInUser.id === thread.creator.id) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (userIsCreator) {
       const editedThread = {
         ...thread,
         title: threadData.editedTitle,
         description: threadData.editedDescription,
-      }
-      onUpdate(editedThread)
-      setThreadData((prevState) => ({ ...prevState, isEditing: false }))
+      };
+      onUpdate(editedThread);
+      setThreadData((prevState) => ({ ...prevState, isEditing: false }));
     }
-  }
+  };
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    // Check if the logged-in user is the creator of the thread
-    if (loggedInUser && loggedInUser.id === thread.creator.id) {
-      setThreadData((prevState) => ({ ...prevState, isDeleting: true }))
+    e.preventDefault();
+    e.stopPropagation();
+    if (userIsCreator) {
+      setThreadData((prevState) => ({ ...prevState, isDeleting: true }));
     }
-  }
+  };
 
   const handleConfirmDelete = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (loggedInUser && loggedInUser.id === thread.creator.id) {
-      onDelete(thread.id)
-      window.location.reload()
+    e.preventDefault();
+    e.stopPropagation();
+    if (userIsCreator) {
+      onDelete(thread.id);
+      window.location.reload();
     }
-  }
+  };
 
   return (
     
@@ -102,17 +98,19 @@ function Thread({
                   ...prevState,
                   editedDescription: e.target.value,
                 }))
-              }></textarea>
+              }
+            ></textarea>
             <button onClick={handleSave}>Save</button>
             <button
-              onClick={(e: MouseEvent<HTMLButtonElement>) =>
-                { e.preventDefault()
-                  e.stopPropagation()
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                e.stopPropagation();
                 setThreadData((prevState) => ({
                   ...prevState,
                   isEditing: false,
-                }))}
-              }>
+                }));
+              }}
+            >
               Cancel
             </button>
           </div>
@@ -121,15 +119,13 @@ function Thread({
             <h2>{thread.title}</h2>
             <p>Creator: {thread.creator.name}</p>
             <p>Description: {thread.description}</p>
-            {thread.category === 'QNA' &&
-              'isAnswered' in thread &&
-              thread.isAnswered === true && (
-                <div>
-                  <h3>Answered!</h3>
-                  <p>Answer: {threadData.answer?.content}</p>
-                  <p>By: {threadData.answer?.creator.userName}</p>
-                </div>
-              )}
+            {thread.category === 'QNA' && 'isAnswered' in thread && thread.isAnswered === true && (
+              <div>
+                <h3>Answered!</h3>
+                <p>Answer: {threadData.answer?.content}</p>
+                <p>By: {threadData.answer?.creator.userName}</p>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -141,14 +137,15 @@ function Thread({
             </button>
             <button
               className="btn_edit"
-              onClick={(e: MouseEvent<HTMLButtonElement>) =>
-                { e.preventDefault()
-                  e.stopPropagation()
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                e.stopPropagation();
                 setThreadData((prevState) => ({
                   ...prevState,
                   isDeleting: false,
-                }))}
-              }>
+                }));
+              }}
+            >
               Cancel
             </button>
           </div>
@@ -161,9 +158,8 @@ function Thread({
               <span>{thread.creationDate}</span>
             </div>
             <div>
-              {loggedInUser ? (
+              {userIsCreator ? (
                 <>
-                {/* onClick={(e) => { e.stopPropagation()} */}
                   <button className="btn_edit" onClick={handleEdit}>
                     <FaEdit />
                   </button>
@@ -178,12 +174,10 @@ function Thread({
             </div>
           </div>
         )}
-
       </div>
-    {/* <Link to={`/${thread.id}`} className='blockLink'></Link> */}
     </Link>
-    
-  )
+  );
 }
 
-export default Thread
+export default Thread;
+
