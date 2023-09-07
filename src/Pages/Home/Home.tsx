@@ -22,7 +22,7 @@ const Home = () => {
 
   // Function to handle thread updates
   const handleThreadUpdate = (updatedThread: Thread) => {
-    const updatedThreads = threads.map((thread) =>
+    const updatedThreads: Thread[] = threads.map((thread) =>
       thread.id === updatedThread.id ? updatedThread : thread
     );
     setThreads(updatedThreads);
@@ -30,11 +30,9 @@ const Home = () => {
 
   // Function to handle thread deletions
   const handleThreadDelete = (threadId: number) => {
-    const updatedThreads = threads.filter((thread) => thread.id !== threadId);
+    const updatedThreads: Thread[] = threads.filter((thread) => thread.id !== threadId);
     setThreads(updatedThreads);
   };
-
-  console.log(loggedInUser);
 
   return (
     <div>
@@ -57,19 +55,7 @@ const Home = () => {
       ) : (
         <></>
       )}
-      {/* {toggleView && loggedInUser ? (
-        <ThreadCreationView loggedInUser={loggedInUser} />
-
-      ) : (
-        <ThreadListView
-          threads={threads}
-          setThreads={setThreads}
-          loggedInUser={loggedInUser} // Pass the loggedInUser prop here
-          onUpdate={handleThreadUpdate}
-          onDelete={handleThreadDelete}
-        />
-
-      )} */}
+     
     </div>
   );
 };

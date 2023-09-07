@@ -32,14 +32,14 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
 
     if (loggedInUserData) {
       // Parse and set the logged-in user
-      const user = JSON.parse(loggedInUserData)
+      const user: User = JSON.parse(loggedInUserData)
       setLoggedInUser(user)
     }
   }, []) // This effect runs only once on component mount
 
   // Handle updating a thread
   const handleThreadUpdate = (updatedThread: Thread) => {
-    const updatedThreads = threads.map((thread) =>
+    const updatedThreads: Thread[] = threads.map((thread) =>
       thread.id === updatedThread.id ? updatedThread : thread
     )
     setThreads(updatedThreads)
@@ -50,7 +50,7 @@ function ThreadListView({ threads, setThreads }: ThreadListViewProps) {
 
   // Handle deleting a thread
   const handleThreadDelete = (threadId: number) => {
-    const updatedThreads = threads.filter((thread) => thread.id !== threadId)
+    const updatedThreads: Thread[] = threads.filter((thread) => thread.id !== threadId)
     setThreads(updatedThreads)
 
     // Update the threads in localStorage

@@ -1,40 +1,37 @@
-
-
 interface User {
-  id: number
-  name: string
-  userName: string
-  password: string
+  id: number;
+  name: string;
+  userName: string;
+  password: string;
 }
 
-type ThreadCategory = 'THREAD' | 'QNA';
+type ThreadCategory = "THREAD" | "QNA";
 
 interface Thread {
-  id: number
-  title: string
-  category: ThreadCategory
-  creationDate: string
-  description: string
-  creator: User
+  id: number;
+  title: string;
+  category: ThreadCategory;
+  creationDate: string;
+  description: string;
+  creator: User;
   comments: _Comment[];
-
 }
 
 interface QNAThread extends Thread {
-  category: "QNA"
-  isAnswered: boolean
-  commentAnswerId?: number
+  category: "QNA";
+  isAnswered: boolean;
+  commentAnswerId?: number;
 }
 
 interface _Comment {
-  id: number
-  thread: number
-  content: string
-  creator: User
+  id: number;
+  thread: number;
+  content: string;
+  creator: User;
 }
 
 interface commentProps {
-  comment: _Comment
+  comment: _Comment;
 }
 
 interface ThreadCreationViewProps {
@@ -45,6 +42,13 @@ interface ThreadDetailViewProps {
   loggedInUser: User;
 }
 
+interface ThreadData {
+  answer?: _Comment;
+  isEditing: boolean;
+  editedTitle: string;
+  editedDescription: string;
+  isDeleting: boolean;
+}
 
 interface AuthFormProps {
   setLoggedInUser: (user: User | null) => void;
@@ -52,19 +56,19 @@ interface AuthFormProps {
 }
 
 interface ThreadProps {
-  thread: Thread | QNAThread
-  comments: _Comment[]
-  loggedInUser: User | null // Add the loggedInUser prop
-  onUpdate: (updatedThread: Thread) => void // Add the onUpdate prop
-  onDelete: (threadId: number) => void // Add the onDelete prop
+  thread: Thread | QNAThread;
+  comments: _Comment[];
+  loggedInUser: User | null; // Add the loggedInUser prop
+  onUpdate: (updatedThread: Thread) => void; // Add the onUpdate prop
+  onDelete: (threadId: number) => void; // Add the onDelete prop
 }
 
 interface ThreadOverviewProps {
-  thread: Thread | QNAThread
+  thread: Thread | QNAThread;
 }
 
 interface commentProps {
-  comment: _Comment
+  comment: _Comment;
 }
 
 interface ThreadCreationViewProps {
@@ -72,16 +76,14 @@ interface ThreadCreationViewProps {
 }
 
 interface ThreadListViewProps {
-  threads: Thread[]
-  setThreads: React.Dispatch<React.SetStateAction<Thread[]>>
-  loggedInUser: User | null
-  onUpdate: (updatedThread: Thread) => void // Add this line
-  onDelete: (threadId: number) => void // Add this line
+  threads: Thread[];
+  setThreads: React.Dispatch<React.SetStateAction<Thread[]>>;
+  loggedInUser: User | null;
+  onUpdate: (updatedThread: Thread) => void; // Add this line
+  onDelete: (threadId: number) => void; // Add this line
 }
 
 // Define the props required for the AddComment component
 interface AddCommentProps {
   onSubmit: (content: string) => void; // Function to handle comment submission
 }
-
-

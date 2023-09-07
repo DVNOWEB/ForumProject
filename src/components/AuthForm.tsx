@@ -11,10 +11,10 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
   // Define state variables
   const { toggleView , setToggleView } = useUserContext()
 
-  const [name, setName] = useState('')
-  const [userName, setUserName] = useState('')
-  const [password, setPassword] = useState('')
-  const [isRegistered, setIsRegistered] = useState(true)
+  const [name, setName] = useState<string>('')
+  const [userName, setUserName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [isRegistered, setIsRegistered] = useState<boolean>(true)
   const [message, setMessage] = useState<string | null>(null)
   const [messageColor, setMessageColor] = useState<string | null>(null)
 

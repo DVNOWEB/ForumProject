@@ -15,7 +15,6 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
 
   const searchProps: string = window.location.pathname.split("/")[1]; 
   const propsId: number = parseInt(searchProps);
-  console.log(propsId)
 
   //Hämtar Threads från localstorage.
   useEffect(() => {
@@ -28,7 +27,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
 
       //Lägger threaden vi är inne på i en variabel.
       const desiredThreadId: number = propsId;
-      const selected = parsedThreads.find(
+      const selected: Thread | undefined = parsedThreads.find(
         (thread) => thread.id === desiredThreadId
       );
       setThread(selected);
@@ -53,7 +52,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
       if (!updatedThreadsArray) {
         return;
       }
-      const data = JSON.stringify(updatedThreadsArray);
+      const data: string = JSON.stringify(updatedThreadsArray);
       if (!data) {
         return;
       }
@@ -121,7 +120,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
       </form>
       {thread && thread.comments && (
         thread.comments.map((comment) => (
-          <CommentComponent comment={comment} />
+          <CommentComponent key={comment.id} comment={comment} />
         ))  
       )}
             

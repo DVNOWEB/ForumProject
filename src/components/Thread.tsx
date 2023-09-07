@@ -19,7 +19,7 @@ function Thread({
     isDeleting: false,
   };
 
-  const [threadData, setThreadData] = useState(initialThreadData);
+  const [threadData, setThreadData] = useState<ThreadData>(initialThreadData);
 
   useEffect(() => {
     if ('isAnswered' in thread && thread.isAnswered === true) {

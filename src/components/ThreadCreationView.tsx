@@ -79,7 +79,7 @@ useEffect(() => {
       return;
     }
 
-    let threadData
+    let threadData: Thread | QNAThread | undefined = undefined
 
     if (category === "THREAD") {
       // Create a new thread object for the 'THREAD' category
