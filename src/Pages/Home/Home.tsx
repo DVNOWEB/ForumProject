@@ -40,7 +40,24 @@ const Home = () => {
     <div>
       <AuthForm setLoggedInUser={setLoggedInUser} />
 
-      {toggleView && loggedInUser ? (
+      {loggedInUser ? (
+        <>
+          {toggleView ? (
+            <ThreadCreationView loggedInUser={loggedInUser} />
+          ) : (
+            <ThreadListView
+              threads={threads}
+              setThreads={setThreads}
+              loggedInUser={loggedInUser} // Pass the loggedInUser prop here
+              onUpdate={handleThreadUpdate}
+              onDelete={handleThreadDelete}
+            />
+          )}
+        </>
+      ) : (
+        <></>
+      )}
+      {/* {toggleView && loggedInUser ? (
         <ThreadCreationView loggedInUser={loggedInUser} />
 
       ) : (
@@ -52,7 +69,7 @@ const Home = () => {
           onDelete={handleThreadDelete}
         />
 
-      )}
+      )} */}
     </div>
   );
 };
