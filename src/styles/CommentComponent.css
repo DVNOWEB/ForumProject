@@ -12,6 +12,11 @@
     transition: all 0.3s ease-out;
     
 }
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 
 .commentContainer:hover {
     background-color: #e6e6e6;
