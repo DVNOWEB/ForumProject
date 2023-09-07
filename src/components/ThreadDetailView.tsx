@@ -3,6 +3,10 @@ import "../styles/ThreadDetailView.css";
 import CommentComponent from "./CommentComponent";
 import ThreadOverView from "./ThreadOverview";
 
+import { Link } from "react-router-dom";
+
+
+
 
 const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   // Create an instance of the Thread type
@@ -87,6 +91,8 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
       
     };
     addComment(newComment);
+     // Clear the form inputs
+    setContent("")
     }
   }
 
@@ -106,7 +112,12 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <button className="addComment-btn">Add comment</button>
+          <div>
+            <button className="addComment-btn">Add comment</button>
+            <Link to={`/`}>
+              <button className="back-btn">Back to Previous page</button>
+            </Link>
+          </div>
       </form>
       {thread && thread.comments && (
         thread.comments.map((comment) => (
