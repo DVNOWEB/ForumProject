@@ -3,6 +3,7 @@ import "../styles/ThreadDetailView.css";
 import CommentComponent from "./CommentComponent";
 import { Link } from "react-router-dom";
 
+import ThreadOverView from "./ThreadOverview";
 
 
 const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
@@ -101,7 +102,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   
   return (
     <div className="details-container">
-      {/* {thread &&  <Thread thread={thread} comments={thread?.comments} />} */}
+      {thread && <ThreadOverView thread={thread} />}
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input
             type="text"
