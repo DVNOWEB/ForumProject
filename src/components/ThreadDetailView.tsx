@@ -100,9 +100,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   
   return (
     <div className="details-container">
-      <h1>Details</h1>
-      
-      {thread && <Thread thread={thread} comments={thread.comments} />}
+      {/* {thread &&  <Thread thread={thread} comments={thread?.comments} />} */}
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input
             type="text"

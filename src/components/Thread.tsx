@@ -13,8 +13,7 @@ import '../styles/Thread.css'
   
   
   return (
-    <div className='threadContainer'>
-      <button>Go to thread</button>
+    <div className="threadContainer">
       <div>
       <h2>{thread.title}</h2>
       <p>Creator: {thread.creator.name}</p>
