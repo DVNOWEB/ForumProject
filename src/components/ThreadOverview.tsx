@@ -4,7 +4,7 @@ const ThreadOverview = ({ thread }: ThreadOverviewProps) => {
   return (
     <div>
       {thread && (
-        <div className="threadContainer">
+        <div >
           <div>
             <h2>Title: {thread.title}</h2>
             <p>Creator: {thread.creator.name}</p>

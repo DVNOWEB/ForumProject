@@ -138,8 +138,8 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
       {localStorage.getItem('loggedInUser') ? (
         <div className="welcome_div">
           <h2>Welcome, {name || 'User'}!</h2>
-          <button onClick={handleLogout}>Log Out</button>
-          <button onClick={() => setToggleView(state => !state)}>{toggleView ? 'Home' : 'Create New Thread'}</button>
+          <button className='logout-btn' onClick={handleLogout}>Log Out</button>
+          <button className='createnew-btn' onClick={() => setToggleView(state => !state)}>{toggleView ? 'Home' : 'Create New Thread'}</button>
 
         </div>
       ) : (

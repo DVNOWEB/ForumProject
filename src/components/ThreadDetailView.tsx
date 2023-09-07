@@ -102,7 +102,9 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   
   return (
     <div className="details-container">
+      <div className="title-container">
       {thread && <ThreadOverView thread={thread} />}
+      </div>
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input
             type="text"
