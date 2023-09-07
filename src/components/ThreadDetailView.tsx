@@ -95,11 +95,6 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
     }
   }
 
-
- 
-
-  
-
   const selectAnswer = (comment: _Comment) => {
     if (thread && 'isAnswered' in thread && thread.category === 'QNA') {
       const updatedThread: QNAThread = {
@@ -117,7 +112,6 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
       
     }
   }
-
 
   return (
     <div className="details-container">
@@ -146,7 +140,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
     ))}
             
     </div>
-  );
+  )
 }
 
 export default ThreadDetailView;
