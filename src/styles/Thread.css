@@ -18,3 +18,20 @@
     background-color: #e6e6e6;
     box-shadow: 0 2px 3px #e6e6e6;
 }
+
+.btn_delete{
+    color: #ff0000;
+}
+
+button.btn_edit,
+button.btn_delete{
+    width: 10vw;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+button.btn_edit:hover,
+button.btn_delete:hover{
+    background-color: #9ff79f;
+}
