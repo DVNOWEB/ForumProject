@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import ThreadDetailView from './components/ThreadDetailView';
-
-import { useState } from 'react'
-=======
 import { useEffect, useState } from 'react'
->>>>>>> 4a955bc033d17bb5f31cedc6d63c75385322f03f
 import AuthForm from './components/AuthForm'
 import ThreadCreationView from './components/ThreadCreationView'
 import ThreadListView from './components/ThreadListView'
-import ThreadDetailView from './components/details/ThreadDetailView'
+// import ThreadDetailView from './components/details/ThreadDetailView'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null)
@@ -41,10 +35,6 @@ function App() {
     <div className="App">
       <AuthForm setLoggedInUser={setLoggedInUser} />
       {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
-<<<<<<< HEAD
-      <ThreadListView />
-      {loggedInUser && <ThreadDetailView loggedInUser={loggedInUser} />}
-=======
       <ThreadListView
         threads={threads}
         setThreads={setThreads}
@@ -52,8 +42,7 @@ function App() {
         onUpdate={handleThreadUpdate}
         onDelete={handleThreadDelete}
       />
-      <ThreadDetailView />
->>>>>>> 4a955bc033d17bb5f31cedc6d63c75385322f03f
+      {/* <ThreadDetailView /> */}
     </div>
   )
 }
