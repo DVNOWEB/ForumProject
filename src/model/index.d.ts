@@ -1,3 +1,5 @@
+
+
 interface User {
   id: number
   name: string
@@ -77,3 +79,5 @@ interface ThreadListViewProps {
 interface AddCommentProps {
   onSubmit: (content: string) => void; // Function to handle comment submission
 }
+
+
