@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/ThreadDetailView.css";
-import AuthForm from "./AuthForm";
-import Thread from "./Thread";
-import CommentComponent from "./details/CommentComponent";
-import AddComment from "./details/AddComment";
-import { on } from "events";
 
-//-------------------------------------------------------------------------------------------------------------------------
+
 
 const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   // Create an instance of the Thread type
