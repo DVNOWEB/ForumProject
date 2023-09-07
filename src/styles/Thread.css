@@ -19,13 +19,32 @@
     box-shadow: 0 2px 3px #e6e6e6;
 }
 
+.thread_input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.thread_right-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
 .btn_delete{
     color: #ff0000;
+    margin-left: .5rem;
 }
 
 button.btn_edit,
 button.btn_delete{
-    width: 10vw;
+    width: 8vw;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-out;

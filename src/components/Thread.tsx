@@ -69,7 +69,7 @@ function Thread({
     <div className="threadContainer">
       <div>
         {threadData.isEditing ? (
-          <div>
+          <div className="thread_input-container">
             <input
               type="text"
               value={threadData.editedTitle}
@@ -119,10 +119,11 @@ function Thread({
       <div>
         {threadData.isDeleting ? (
           <div>
-            <button onClick={handleConfirmDelete}>
+            <button className="btn_delete" onClick={handleConfirmDelete}>
               Yes, Delete
             </button>
             <button
+              className="btn_edit"
               onClick={() =>
                 setThreadData((prevState) => ({
                   ...prevState,
@@ -133,14 +134,14 @@ function Thread({
             </button>
           </div>
         ) : (
-          <>
+          <div className="thread_right-box">
             <div>
               <div>
-                <div>
-                  <span>{thread.category}</span>
-                </div>
-                <span>{thread.creationDate}</span>
+                <span>{thread.category}</span>
               </div>
+              <span>{thread.creationDate}</span>
+            </div>
+            <div>
               {loggedInUser ? (
                 <>
                   <button className="btn_edit" onClick={handleEdit}>
@@ -155,7 +156,7 @@ function Thread({
             <div>
               <span>{comments.length} comments</span>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
