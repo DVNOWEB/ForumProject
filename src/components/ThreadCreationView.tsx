@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import "../styles/ThreadCreationView.css";
+import { useUserContext } from "../Context/Context";
+
 
 const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
   // State variables to manage the form inputs
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<ThreadCategory>("THREAD");
   const [description, setDescription] = useState<string>("");
+  const [newThread, setNewThread] = useState<Thread | QNAThread | null>(null)
+  const { toggleView, setToggleView } = useUserContext()
+
 
   // State to track the next available thread ID
   const [nextThreadId, setNextThreadId] = useState<number>(1);
@@ -41,6 +46,20 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
     }
   };
 
+useEffect(() => {
+  if (newThread) {
+    // Save the new thread to localStorage
+    saveThreadToLocalStorage(newThread);
+
+    // Clear the form inputs
+    setTitle("");
+    setDescription("");
+  setToggleView(state => !state)
+
+  }
+}, [newThread])
+
+
   // Function to format the current date in 'YYYY-MM-DD' format
   const formatCurrentDate = () => {
     const currentDate = new Date();
@@ -60,11 +79,11 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       return;
     }
 
-    let newThread: Thread | QNAThread | null = null;
+    let threadData
 
     if (category === "THREAD") {
       // Create a new thread object for the 'THREAD' category
-      newThread = {
+      threadData = {
         id: nextThreadId,
         title,
         category,
@@ -75,7 +94,7 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
       };
     } else if (category === "QNA") {
       // Create a new Q'n'A thread object for the 'QNA' category
-      newThread = {
+      threadData = {
         id: nextThreadId,
         title,
         category,
@@ -87,23 +106,13 @@ const ThreadCreationView = ({ loggedInUser }: ThreadCreationViewProps) => {
         comments: [],
       };
     } else {
-      console.error("Error: Invalid category");
       // Handle the error here, e.g., display a message to the user
+      console.error("Error: Invalid category");
+      return
     }
 
-    if (newThread) {
-      // Save the new thread to localStorage
-      saveThreadToLocalStorage(newThread);
+    setNewThread(threadData)
 
-      // Clear the form inputs
-      setTitle("");
-      setDescription("");
-
-      // Increment the next available ID for the next thread
-      setNextThreadId(nextThreadId + 1);
-    }
-    // Reload the page after successfully creating the thread
-    window.location.reload();
   };
 
   return (
