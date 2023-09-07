@@ -4,6 +4,7 @@ import RootLayout from "./layouts/Rootlayout/Rootlayout";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
 import { UserProvider } from "./Context/Context";
+import ThreadCreationView from "./components/ThreadCreationView";
 
 const App = () => {
   return (

@@ -73,10 +73,14 @@ function Thread({
   };
 
   return (
-    <Link to={`/${thread.id}`} className="threadContainer">
+    
+    <Link to={`/${thread.id}`}  className="threadContainer">
       <div>
         {threadData.isEditing ? (
-          <div className="thread_input-container">
+          <div className="thread_input-container" onClick={(e: MouseEvent<HTMLElement>) => { 
+            e.preventDefault();
+            e.stopPropagation();
+          }}>
             <input
               type="text"
               value={threadData.editedTitle}

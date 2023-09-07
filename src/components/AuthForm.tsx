@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../styles/AuthForm.css'
+import { useUserContext } from '../Context/Context'
 
 // Define the props interface for AuthForm
 interface AuthFormProps {
@@ -8,6 +9,8 @@ interface AuthFormProps {
 
 function AuthForm({ setLoggedInUser }: AuthFormProps) {
   // Define state variables
+  const { toggleView , setToggleView } = useUserContext()
+
   const [name, setName] = useState('')
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
@@ -136,6 +139,8 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
         <div className="welcome_div">
           <h2>Welcome, {name || 'User'}!</h2>
           <button onClick={handleLogout}>Log Out</button>
+          <button onClick={() => setToggleView(state => !state)}>{toggleView ? 'Home' : 'Create New Thread'}</button>
+
         </div>
       ) : (
         <div className="form_container">
