@@ -9,10 +9,14 @@
     box-shadow: 0 2px 3px #9d9c9c;
     padding: 1rem;
     margin-bottom: 1rem;
-
     transition: all 0.3s ease-out;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+
 }
+
+
 
 .threadContainer:hover{
     background-color: #e6e6e6;
