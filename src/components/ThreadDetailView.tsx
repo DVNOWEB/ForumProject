@@ -106,7 +106,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
       {thread && <ThreadOverView thread={thread} />}
       </div>
       <form onSubmit={handleSubmit} className="form" action="submit">
-          <input
+          <input className="detail-input"
             type="text"
             placeholder="Write your comment here..."
             value={content}
