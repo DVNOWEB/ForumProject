@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../styles/ThreadDetailView.css";
 import CommentComponent from "./CommentComponent";
 import ThreadOverView from "./ThreadOverview";
+
 import { Link } from "react-router-dom";
+
 
 
 
