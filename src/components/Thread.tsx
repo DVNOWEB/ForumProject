@@ -130,6 +130,7 @@
 import { useState, useEffect } from 'react'
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'
 import '../styles/Thread.css'
+import { Link } from 'react-router-dom'
 
 function Thread({
   thread,
@@ -195,7 +196,8 @@ function Thread({
   }
 
   return (
-    <div className="threadContainer">
+    
+    <Link to={`/${thread.id}`} className="threadContainer">
       <div>
         {threadData.isEditing ? (
           <div>
@@ -287,7 +289,7 @@ function Thread({
           </>
         )}
       </div>
-    </div>
+    </Link>
   )
 }
 
