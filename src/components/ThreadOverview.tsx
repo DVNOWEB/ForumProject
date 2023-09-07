@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const ThreadOverview = ({ thread }: ThreadOverviewProps) => {
+
+
+const ThreadOverview = ({ thread, comments }: ThreadOverviewProps) => {
+  if('isAnswered' in thread){
+
+  }
+  
+  const [answer, setAnswer] = useState<_Comment>()
+  /* const [answerContent, setAnswerContent] = useState<string>('')
+  const [answerCreator, setAnswerCreator] = useState<string>('') */
+
+  useEffect(() => {
+
+    if(thread && 'isAnswered' in thread) {
+      if(thread.commentAnswerId){
+        const _answer = comments.find((comment) => (
+          comment.id === thread.commentAnswerId)
+        )
+        setAnswer(_answer)
+        /* if(answer){
+          setAnswerContent(answer.content)
+          setAnswerCreator(answer.creator.name)
+        } */
+        
+      }
+    }
+  }, [thread, comments])
+
+
+
+
   return (
     <div>
       {thread && (
@@ -16,8 +46,15 @@ const ThreadOverview = ({ thread }: ThreadOverviewProps) => {
               thread.isAnswered === true && (
                 <div>
                   <h3>Answered!</h3>
-                  {/* <p>Answer: {threadData.answer?.content}</p>
-                    <p>By: {threadData.answer?.creator.userName}</p> */}
+                  <p>Answer: {answer?.content}</p>
+                  <p>By: {answer?.creator.name}</p>
+                </div>
+              )}
+              {thread.category === "QNA" &&
+              "isAnswered" in thread &&
+              thread.isAnswered === false && (
+                <div>
+                  <h3>Not Answered</h3>
                 </div>
               )}
           </div>

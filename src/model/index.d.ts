@@ -64,7 +64,8 @@ interface ThreadProps {
 }
 
 interface ThreadOverviewProps {
-  thread: Thread | QNAThread;
+  thread: Thread | QNAThread
+  comments: _Comment[]
 }
 
 interface commentProps {

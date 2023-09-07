@@ -12,9 +12,11 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   const [thread, setThread] = useState<Thread | QNAThread>();
   const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
   const [content, setContent] = useState<string>("")
+  const [reload, setReload] = useState<boolean>(false)
 
   const searchProps: string = window.location.pathname.split("/")[1]; 
   const propsId: number = parseInt(searchProps);
+  
 
   //Hämtar Threads från localstorage.
   useEffect(() => {
@@ -94,16 +96,32 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   }
 
 
-
-
-
+ 
 
   
+
+  const selectAnswer = (comment: _Comment) => {
+    if (thread && 'isAnswered' in thread && thread.category === 'QNA') {
+      const updatedThread: QNAThread = {
+        ...thread,
+        commentAnswerId: comment.id,
+        isAnswered: true
+      };
+
+      const updatedThreadsArray = threadsArray.filter(
+        (t) => t.id !== thread.id
+      )
+      const updatedThreads = [...updatedThreadsArray, updatedThread]
+      setThread(updatedThread)
+      localStorage.setItem('threads', JSON.stringify(updatedThreads))
+      
+    }
+  }
+
+
   return (
     <div className="details-container">
-      <div className="title-container">
-      {thread && <ThreadOverView thread={thread} />}
-      </div>
+      {thread && <ThreadOverView thread={thread} comments={thread.comments}/>}
       <form onSubmit={handleSubmit} className="form" action="submit">
           <input className="detail-input"
             type="text"
@@ -118,11 +136,14 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
             </Link>
           </div>
       </form>
-      {thread && thread.comments && (
-        thread.comments.map((comment) => (
-          <CommentComponent key={comment.id} comment={comment} />
-        ))  
-      )}
+      {thread && thread.comments && thread.comments.map((comment) => (
+      <button
+        className="commentContainer"
+        key={comment.id}
+        onClick={() => selectAnswer(comment)}>
+        <CommentComponent comment={comment}/>  
+      </button>
+    ))}
             
     </div>
   );

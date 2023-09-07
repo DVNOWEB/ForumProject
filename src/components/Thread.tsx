@@ -126,6 +126,11 @@ function Thread({
                 <p>By: {threadData.answer?.creator.userName}</p>
               </div>
             )}
+            {thread.category === 'QNA' && 'isAnswered' in thread && thread.isAnswered === false && (
+              <div>
+                <h3>Not Answered </h3>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -170,7 +175,7 @@ function Thread({
               ) : null}
             </div>
             <div>
-              <span>{comments.length} comments</span>
+              <span>{thread.comments.length} comments</span>
             </div>
           </div>
         )}
