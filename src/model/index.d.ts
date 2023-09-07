@@ -59,6 +59,10 @@ interface ThreadProps {
   onDelete: (threadId: number) => void // Add the onDelete prop
 }
 
+interface ThreadOverviewProps {
+  thread: Thread | QNAThread
+}
+
 interface commentProps {
   comment: _Comment
 }
