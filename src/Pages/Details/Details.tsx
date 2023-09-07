@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import ThreadDetailView from '../../components/ThreadDetailView'
-import { useUserContext } from '../../Context/Context'
-
+import React, { useContext, useEffect, useState } from "react";
+import ThreadDetailView from "../../components/ThreadDetailView";
+import { useUserContext } from "../../Context/Context";
 
 const Details = () => {
-    
-const { loggedInUser, setLoggedInUser } = useUserContext();
-  
- console.log(loggedInUser)
+  const { loggedInUser, setLoggedInUser } = useUserContext();
 
   return (
     <div>
-
-        {loggedInUser && <ThreadDetailView loggedInUser={loggedInUser} />}
-
+      {loggedInUser && <ThreadDetailView loggedInUser={loggedInUser} />}
     </div>
-  )
-}
+  );
+};
 
-export default Details
+export default Details;
