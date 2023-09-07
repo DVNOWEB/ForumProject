@@ -123,7 +123,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <div>
+          <div className="buttons">
             <button className="addComment-btn">Add comment</button>
             <Link to={`/`}>
               <button className="back-btn">Back to Previous page</button>
