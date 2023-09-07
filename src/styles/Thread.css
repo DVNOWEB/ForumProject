@@ -2,6 +2,7 @@
 .threadContainer{
     display: flex;
     flex-direction: row;
+    position: relative;
     align-items: top;
     justify-content: space-between;
     width: 80%;
@@ -44,6 +45,8 @@
     margin-left: .5rem;
 }
 
+button {
+}
 button.btn_edit,
 button.btn_delete{
     width: 8vw;
@@ -55,4 +58,10 @@ button.btn_delete{
 button.btn_edit:hover,
 button.btn_delete:hover{
     background-color: #9ff79f;
+}
+
+.blockLink {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
