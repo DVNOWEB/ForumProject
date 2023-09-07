@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 
 
 
-interface UserValue {
+interface UserContextProps {
   loggedInUser: User | null;
   setLoggedInUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
@@ -13,7 +13,7 @@ interface UserProviderProps {
 }
 
 
-const UserContext = React.createContext<UserValue | undefined>(undefined)
+const UserContext = React.createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);

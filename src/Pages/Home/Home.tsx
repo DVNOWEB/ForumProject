@@ -15,7 +15,7 @@ console.log(loggedInUser)
 
   return (
     <div>
-      <Link to="/5">hej</Link>
+      <Link to="/1">hej</Link>
          <AuthForm setLoggedInUser={setLoggedInUser} />
         {/* Pass loggedInUser and threads to ThreadCreationView */}
         {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}

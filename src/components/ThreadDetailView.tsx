@@ -15,7 +15,7 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
   const [content, setContent] = useState<string>("")
 
-  const searchProps: string = window.location.pathname.split("/")[1];
+  const searchProps: string = window.location.pathname.split("/")[1]; 
   const propsId: number = parseInt(searchProps);
   console.log(propsId)
 
