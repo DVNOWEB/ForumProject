@@ -1,4 +1,37 @@
 
+.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    padding: 10px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 80%;
+    padding: 10px;
+    box-shadow: 2px 2px 5px 1px #888888;  
+}
+
+.Thread-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 80%;
+    padding: 10px;
+    box-shadow: 2px 2px 5px 1px #888888;  
+}
 
 .addComment-btn {
     background-color: blue;
@@ -8,4 +41,26 @@
 .back-btn {
     background-color: red;
     color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    padding-bottom: 2rem;
+}
+
+input {
+    background-color: rgb(221, 221, 221);
+    padding: 1rem;
+    font-size: .8rem;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid red;
 }

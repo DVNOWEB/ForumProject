@@ -41,7 +41,7 @@ span{
     justify-content: center;
     width: 80%;
     height: 50%;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 2px 3px 2px #ccc;
     padding: 2rem;
 }
 
@@ -98,4 +98,14 @@ button{
 
 button:hover{
     box-shadow: none;
+}
+
+.logout-btn {
+    background-color: rgb(255, 52, 6);
+    color: black;
+}
+
+.createnew-btn {
+    background-color: rgba(41, 255, 41, 0.843);
+    color: black;
 }
