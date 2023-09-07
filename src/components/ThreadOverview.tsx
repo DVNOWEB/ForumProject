@@ -9,6 +9,8 @@ const ThreadOverview = ({ thread }: ThreadOverviewProps) => {
             <h2>{thread.title}</h2>
             <p>Creator: {thread.creator.name}</p>
             <p>Description: {thread.description}</p>
+            <h4>Type: {thread.category}</h4>
+            <p>Date: {thread.creationDate}</p>
             {thread.category === "QNA" &&
               "isAnswered" in thread &&
               thread.isAnswered === true && (

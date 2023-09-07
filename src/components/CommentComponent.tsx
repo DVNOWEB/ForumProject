@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
+import '../styles/CommentComponent.css'
 function CommentComponent({ comment }: commentProps) {
   
 
     return (
       <div className="commentContainer">
-        <h2>{comment.creator.userName}</h2>
-        <p>{comment.content}</p>
+        <h4 className='commentCreator'>{comment.creator.userName}</h4>
+        <p className='commentMessage'>{comment.content}</p>
       </div>
       
     );
