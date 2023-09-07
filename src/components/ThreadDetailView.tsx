@@ -14,10 +14,8 @@ const ThreadDetailView = ({ loggedInUser }: ThreadDetailViewProps) => {
   const [thread, setThread] = useState<Thread | QNAThread>();
   const [threadsArray, setThreadsArray] = useState<Thread[] | QNAThread[]>([]);
   const [content, setContent] = useState<string>("")
+  const propsId = 2
 
-  const searchProps: string = window.location.pathname.split("/")[1]; 
-  const propsId: number = parseInt(searchProps);
-  console.log(propsId)
 
   //Hämtar Threads från localstorage.
   useEffect(() => {

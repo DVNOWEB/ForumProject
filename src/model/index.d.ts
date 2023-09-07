@@ -1,5 +1,3 @@
-
-
 interface User {
   id: number
   name: string
@@ -51,12 +49,10 @@ interface AuthFormProps {
   loggedInUser: User | null;
 }
 
+
 interface ThreadProps {
   thread: Thread | QNAThread
   comments: _Comment[]
-  loggedInUser: User | null // Add the loggedInUser prop
-  onUpdate: (updatedThread: Thread) => void // Add the onUpdate prop
-  onDelete: (threadId: number) => void // Add the onDelete prop
 }
 
 interface ThreadOverviewProps {
@@ -71,17 +67,9 @@ interface ThreadCreationViewProps {
   loggedInUser: User;
 }
 
-interface ThreadListViewProps {
-  threads: Thread[]
-  setThreads: React.Dispatch<React.SetStateAction<Thread[]>>
-  loggedInUser: User | null
-  onUpdate: (updatedThread: Thread) => void // Add this line
-  onDelete: (threadId: number) => void // Add this line
-}
+
 
 // Define the props required for the AddComment component
 interface AddCommentProps {
   onSubmit: (content: string) => void; // Function to handle comment submission
 }
-
-

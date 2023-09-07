@@ -7,33 +7,12 @@ import { MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 
 
-function Thread({
-  thread,
-  comments,
-  loggedInUser,
-  onUpdate,
-  onDelete,
-}: ThreadProps) {
-  const initialThreadData = {
-    answer: undefined as _Comment | undefined,
-    isEditing: false,
-    editedTitle: thread.title,
-    editedDescription: thread.description,
-    isDeleting: false,
-  }
-
-  const [threadData, setThreadData] = useState(initialThreadData)
-
+  function Thread({ thread, comments }: ThreadProps) {
+  const [answer, setAnswer] = useState<(_Comment)>()
   useEffect(() => {
-    if ('isAnswered' in thread && thread.isAnswered === true) {
+    if('isAnswered' in thread && thread.isAnswered === true){
       const qnaThread = thread as QNAThread
-      setThreadData((prevState) => ({
-        ...prevState,
-        answer:
-          comments.find(
-            (comment) => comment.id === qnaThread.commentAnswerId
-          ) || undefined, // Ensure the answer is either a _Comment or undefined
-      }))
+      setAnswer(comments.find((comment) => (comment.id === qnaThread.commentAnswerId)))
     }
   }, [thread, comments])
 
@@ -41,6 +20,7 @@ function Thread({
     e.preventDefault()
     e.stopPropagation()
     // Check if the logged-in user is the creator of the thread
+    
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       setThreadData((prevState) => ({ ...prevState, isEditing: true }))
     }
@@ -180,5 +160,4 @@ function Thread({
     </Link>
   )
 }
-
-export default Thread
+export default Thread;

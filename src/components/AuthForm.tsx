@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/AuthForm.css'
 
 // Define the props interface for AuthForm
@@ -98,8 +98,6 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
           setMessageColor(null)
         }, 3000)
       }
-      // reload page on submit
-      window.location.reload()
     }
   }
 
@@ -116,10 +114,6 @@ function AuthForm({ setLoggedInUser }: AuthFormProps) {
       setMessage(null)
       setMessageColor(null)
     }, 3000)
-
-
-    // reload page on submit
-    window.location.reload()
   }
 
   return (

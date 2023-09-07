@@ -1,24 +1,22 @@
+import ThreadDetailView from './components/ThreadDetailView';
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RootLayout from "./layouts/Rootlayout/Rootlayout";
-import Home from "./Pages/Home/Home";
-import Details from "./Pages/Details/Details";
-import { UserProvider } from "./Context/Context";
+import { useState } from 'react'
+import AuthForm from './components/AuthForm'
+import ThreadCreationView from './components/ThreadCreationView'
+import ThreadListView from './components/ThreadListView'
 
-const App = () => {
+function App() {
+  const [loggedInUser, setLoggedInUser] = useState<User | null>(null)
+
   return (
-    <BrowserRouter>
-      <UserProvider>
-        <Routes>
-          <Route path="/" element={<RootLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/:id" element={<Details />} />
-          </Route>
-        </Routes>
-      </UserProvider>
-    </BrowserRouter>
-  );
-};
-    
+    <div className="App">
+      <AuthForm setLoggedInUser={setLoggedInUser} />
+      {/* Pass loggedInUser and threads to ThreadCreationView */}
+      {loggedInUser && <ThreadCreationView loggedInUser={loggedInUser} />}
+      <ThreadListView />
+      {loggedInUser && <ThreadDetailView loggedInUser={loggedInUser} />}
+    </div>
+  )
+}
 
-export default App;
+export default App
