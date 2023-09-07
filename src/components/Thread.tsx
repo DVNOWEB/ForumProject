@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'
 import '../styles/Thread.css'
+import { MouseEvent } from 'react'
 
 import { Link } from 'react-router-dom'
 
@@ -36,14 +37,18 @@ function Thread({
     }
   }, [thread, comments])
 
-  const handleEdit = () => {
+  const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
     // Check if the logged-in user is the creator of the thread
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       setThreadData((prevState) => ({ ...prevState, isEditing: true }))
     }
   }
 
-  const handleSave = () => {
+  const handleSave = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       const editedThread = {
         ...thread,
@@ -55,14 +60,18 @@ function Thread({
     }
   }
 
-  const handleDelete = () => {
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
     // Check if the logged-in user is the creator of the thread
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       setThreadData((prevState) => ({ ...prevState, isDeleting: true }))
     }
   }
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = (e:MouseEvent<HTMLButtonElement> ) => {
+    e.preventDefault()
+    e.stopPropagation()
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       onDelete(thread.id)
       window.location.reload()
@@ -95,11 +104,13 @@ function Thread({
               }></textarea>
             <button onClick={handleSave}>Save</button>
             <button
-              onClick={() =>
+              onClick={(e: MouseEvent<HTMLButtonElement> ) =>
+                {e.preventDefault();
+                e.stopPropagation();
                 setThreadData((prevState) => ({
                   ...prevState,
                   isEditing: false,
-                }))
+                }))}
               }>
               Cancel
             </button>
@@ -128,11 +139,14 @@ function Thread({
               Yes, Delete
             </button>
             <button
-              onClick={() =>
-                setThreadData((prevState) => ({
+              onClick={(e: MouseEvent<HTMLButtonElement>) =>
+                {
+                e.preventDefault();
+                e.stopPropagation();
+                  setThreadData((prevState) => ({
                   ...prevState,
                   isDeleting: false,
-                }))
+                }))}
               }>
               Cancel
             </button>
