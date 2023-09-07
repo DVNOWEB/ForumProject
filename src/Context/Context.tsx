@@ -10,10 +10,12 @@ const UserContext = React.createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+  const [toggleView, setToggleView] = useState<boolean>(false)
+
 
 
   return (
-    <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser, toggleView, setToggleView }}>
       {children}
     </UserContext.Provider>
   )
