@@ -37,6 +37,8 @@ function Thread({
   }, [thread, comments])
 
   const handleEdit = () => {
+
+    
     // Check if the logged-in user is the creator of the thread
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       setThreadData((prevState) => ({ ...prevState, isEditing: true }))
@@ -56,6 +58,7 @@ function Thread({
   }
 
   const handleDelete = () => {
+
     // Check if the logged-in user is the creator of the thread
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       setThreadData((prevState) => ({ ...prevState, isDeleting: true }))
@@ -63,6 +66,7 @@ function Thread({
   }
 
   const handleConfirmDelete = () => {
+
     if (loggedInUser && loggedInUser.id === thread.creator.id) {
       onDelete(thread.id)
       window.location.reload()
@@ -70,8 +74,9 @@ function Thread({
   }
 
   return (
+    // onClick={(e) => { e.stopPropagation()} onClick={(e) => { e.stopPropagation(); handleEdit(e)}}
     
-    <Link to={`/${thread.id}`} className="threadContainer">
+    <Link to={`/${thread.id}`}  className="threadContainer">
       <div>
         {threadData.isEditing ? (
           <div>
@@ -148,6 +153,7 @@ function Thread({
               </div>
               {loggedInUser ? (
                 <>
+                {/* onClick={(e) => { e.stopPropagation()} */}
                   <button className="btn_edit" onClick={handleEdit}>
                     <FaEdit />
                   </button>
@@ -162,8 +168,11 @@ function Thread({
             </div>
           </>
         )}
+
       </div>
+    {/* <Link to={`/${thread.id}`} className='blockLink'></Link> */}
     </Link>
+    
   )
 }
 
